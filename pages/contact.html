@@ -1,11 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="../assets/imgs/Favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/script.js" defer></script>
+    <title>Home Decor - Contact</title>
 </head>
-<body>
-    
+
+<body class="relative">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 shadow-md bg-white md:px-20">
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+            <img src="../assets/imgs/home decor logo.svg" alt="Home Decor" class="h-120 w-120">
+        </div>
+        <!-- Nav Menu -->
+        <nav class="hidden md:flex space-x-6 text-gray-800 font-medium">
+            <a href="./index.html" class="hover:text-yellow-500">Home</a>
+            <a href="./pages/shop.html" class="hover:text-yellow-500">Shop</a>
+            <a href="./pages/contact.html" class="hover:text-yellow-500 text-yellow-500">Contact</a>
+            <a href="./pages/about.html" class="hover:text-yellow-500">About</a>
+            <a href="./pages/checkout.html" class="hover:text-yellow-500">Checkout</a>
+        </nav>
+        <!-- Icons -->
+        <div class="flex space-x-4 items-center">
+            <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
+                <i class="ri-shopping-cart-line text-white text-xl " id="cartIcon"></i>
+            </div>
+            <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
+                <i class="ri-heart-line text-white text-xl"></i>
+            </div>
+            <!-- Hamburger Menu Icon -->
+            <button id="menu-toggle" class="text-gray-800 md:hidden ">
+                <i class="ri-menu-3-line text-2xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <aside id="sidebar"
+        class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+        <div class="flex justify-end p-4">
+            <button id="close-sidebar" class="text-gray-800">
+                <i class="ri-close-line text-2xl"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col space-y-4 p-4 text-gray-800 font-medium">
+            <a href="./index.html" class="hover:text-yellow-500">Home</a>
+            <a href="./shop.html" class="hover:text-yellow-500">Shop</a>
+            <a href="./contact.html" class="hover:text-yellow-500">Contact</a>
+            <a href="./about.html" class="hover:text-yellow-500">About</a>
+            <a href="./checkout.html" class="hover:text-yellow-500">Checkout</a>
+        </nav>
+    </aside>
+
+    <!-- Cart Sidebar Popup -->
+    <div id="cartSidebar"
+        class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+        <div class="p-4 flex-1">
+            <div class="cartHead flex justify-between items-center">
+                <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+                <i class="ri-close-line text-xl cursor-pointer" id="closeCartSidebar"></i>
+            </div>
+            <div class="cartProducts">
+                <p class="text-gray-500">No items in the cart</p>
+            </div>
+        </div>
+        <div class="p-4">
+            <button id="closeSidebar" class="w-full bg-yellow-500 text-white py-2 rounded-full">
+                <a href="./checkout.html">Proceed to Checkout</a>
+            </button>
+        </div>
+    </div>
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden"></div>
+
+    <!-- CONTACT - PAGE -->
+    <main>
+        <section>
+            <h1 class="text-center text-[2.5rem] mt-3 underline underline-offset-1 font-bold ">Contact</h1>
+            <div class="flex justify-center rounded-lg">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10108.05681503306!2d-9.258837615930085!3d32.237251287688906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdac211719897669%3A0x6f59fa5bb517f58a!2sYouCode%20Safi!5e0!3m2!1sfr!2sma!4v1731076290116!5m2!1sfr!2sma"
+                    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    class="w-[90%] md:h-[500px] lg:h-[600px] h-[500px] rounded-lg my-10"></iframe>
+            </div>
+        </section>
+        <section class="md:grid md:grid-cols-2 md:gap-5 md:my-10 md:justify-between">
+            <div class="my-auto ">
+                <form class="flex flex-col items-center mx-5">
+                    <label for="name"></label>
+                    <input type="text" name="name" placeholder="Full Name"
+                        class="w-[90%] sm:w-[75%] md:w-[90%] min-h-10 shadow-xl rounded-md my-5 pl-2">
+
+                    <label for="email"></label>
+                    <input type="email" name="email" placeholder="Email"
+                        class="w-[90%] sm:w-[75%] md:w-[90%] min-h-10 shadow-xl rounded-md my-5 pl-2">
+
+                    <label for="number"></label>
+                    <input type="number" name="number" placeholder="N.téléphone"
+                        class="w-[90%] sm:w-[75%] md:w-[90%] min-h-10 shadow-xl rounded-md my-5 pl-2">
+
+                    <select id="order" name="order"
+                        class="w-[90%] sm:w-[75%] md:w-[90%] h-10 shadow-xl rounded-md my-5">
+                        <option value="Purchase">Purchase Request</option>
+                        <option value="Information">Information Request</option>
+                        <option value="Complaint">Complaint</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <textarea name="message" id="message" placeholder="Message"
+                        class="w-[90%] sm:w-[75%] md:w-[90%] min-h-36 shadow-xl rounded-md my-5 pl-1"></textarea>
+
+                    <button class="bg-yellow-400 w-28 h-10 rounded-md shadow-xl my-3 text-lg">Send</button>
+                </form>
+            </div>
+            <div class="hidden md:block">
+                <img class="h-full mx-auto" src="../assets/imgs/png01 1.png" alt="#">
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-black py-10 px-5 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Company Box -->
+        <div class="box1 flex flex-col items-center md:items-start w-full">
+            <img src="../assets/imgs/home decor logo.svg" alt="Home Decor" class="h-25 w-auto mb-4">
+
+            <!-- Social Media Box -->
+            <div class="social-media flex space-x-3 mb-4">
+                <div class="facebook bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+                    <i class="ri-facebook-fill text-xl"></i>
+                </div>
+                <div class="instagram bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+                    <i class="ri-instagram-line text-xl"></i>
+                </div>
+                <div class="x bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+                    <i class="ri-twitter-x-line text-xl"></i>
+                </div>
+                <div class="linkedin bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+                    <i class="ri-linkedin-fill text-xl"></i>
+                </div>
+            </div>
+
+            <!-- Newsletter Box -->
+            <input type="email" placeholder="Your email address"
+                class="rounded-full border-yellow-500 border p-2 text-center bg-transparent  w-2/4 placeholder-white mt-3 mb-2 sm:w-/4">
+            <button type="submit" class="bg-yellow-500 rounded-full text-black font-medium  w-2/4 py-2 px-6 ">Join
+                Now</button>
+        </div>
+
+        <!-- Links Boxes -->
+        <div class="grid grid-cols-2 gap-10 text-center md:text-left">
+            <div class="box2">
+                <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Pages</h5>
+                <ul class="space-y-2 text-white">
+                    <li><a href="./index.html" class="hover:underline">Home</a></li>
+                    <li><a href="./shop.html" class="hover:underline">Shop</a></li>
+                    <li><a href="./contact.html" class="hover:underline">Contact</a></li>
+                    <li><a href="./about.html" class="hover:underline">About us</a></li>
+                </ul>
+            </div>
+            <div class="box3">
+                <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Links</h5>
+                <ul class="space-y-2 text-white">
+                    <li><a href="./checkout.html" class="hover:underline">Checkout</a></li>
+                    <li><a href="./cart.html" class="hover:underline">Cart</a></li>
+                    <li><a href="./about.html" class="hover:underline">FAQ</a></li>
+                    <li><a href="#" class="hover:underline">Wishlist</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-10 text-center md:text-left">
+            <div class="box4">
+                <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Policies</h5>
+                <ul class="space-y-2 text-white">
+                    <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:underline">Terms of Service</a></li>
+                    <li><a href="#" class="hover:underline">Cookie Policy</a></li>
+                    <li><a href="#" class="hover:underline">Refund</a></li>
+                </ul>
+            </div>
+
+            <div class="box5 mb-20">
+                <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Help</h5>
+                <ul class="space-y-2 text-white">
+                    <li><a href="./contact.html" class="hover:underline">Support</a></li>
+                    <li><a href="mailto:contact@homedecor.com" class="hover:underline">Email</a></li>
+                    <li><a href="tel:+212 772508881" class="hover:underline">Phone Number</a></li>
+                    <li><a href="./blog.html" class="hover:underline">Blog</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <div class="text-center py-5 text-white text-sm bg-black">
+        © 2024 Home Decor. All rights reserved.
+    </div>
+
 </body>
+
 </html>

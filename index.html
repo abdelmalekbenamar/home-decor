@@ -10,7 +10,6 @@
   <script src="./assets/js/script.js" defer></script>
   <title>Home Decor - Furniture and Home Decor Store</title>
 </head>
-
 <body class="relative">
   <!-- Header -->
   <div class="flex items-center justify-between p-4 shadow-md bg-white md:px-20">
@@ -81,7 +80,8 @@
   
   <!-- Hero Section -->
   <div class="m-10 sm:m-0 h-[500px] rounded-2xl relative bg-cover bg-center lg:m-20"
-    style="background-image: url('/assets/imgs/hero.webp');">
+    style="background-image: url('./assets/imgs/hero.webp');">
+
     <div class="rounded-2xl absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
       <div class="text-center px-6 sm:px-12">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-yellow-400 mb-4">
@@ -98,11 +98,50 @@
     </div>
   </div>
 
+    <!-- Products Categories Section -->
+    <div class="lg:m-20 md:m-10 m-4 sm:m-0">
+      <!-- Categories Heading -->
+      <div class="py-8 mb-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold relative inline-block ">Our categories
+          <span class="absolute inset-x-0 bottom-0 h-2 bg-yellow-400 -z-10"></span>
+        </h2>
+      </div>
+      <!-- Categories Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4">
+        <!-- Chairs -->
+        <div
+          class="relative w-40 h-40 sm:w-80 sm:h-80 mx-auto rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img src="./assets/imgs/1.png" alt="Chairs" class="w-full h-full object-cover">
+          <span
+            class="absolute flex items-center justify-center bg-white py-2 px-4 text-sm font-medium rounded-full md:text-xl">Chairs</span>
+        </div>
+        <!-- Tables -->
+        <div
+          class="relative w-40 h-40 sm:w-80 sm:h-80 mx-auto rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img src="./assets/imgs/2.png" alt="Chairs" class="w-full h-full object-cover">
+          <span
+            class="absolute flex items-center justify-center bg-white py-2 px-4 text-sm font-medium rounded-full md:text-xl">Tables</span>
+        </div>
+        <!-- Sofas -->
+        <div
+          class="relative w-40 h-40 sm:w-80 sm:h-80 mx-auto rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img src="./assets/imgs/3.png" alt="Chairs" class="w-full h-full object-cover">
+          <span
+            class="absolute flex items-center justify-center bg-white py-2 px-4 text-sm font-medium rounded-full md:text-xl">Sofas</span>
+        </div>
+        <!-- Beds -->
+        <div
+          class="relative w-40 h-40 sm:w-80 sm:h-80 mx-auto rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img src="./assets/imgs/4.png" alt="Chairs" class="w-full h-full object-cover">
+          <span
+            class="absolute flex items-center justify-center bg-white py-2 px-4 text-sm font-medium rounded-full md:text-xl">Beds</span>
+        </div>
+      </div>
+    </div>
+
   <!-- Footer Section -->
   <footer class="bg-black py-10 px-5 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-10">
-    <!-- Company Box -->
     <div class="box1 flex flex-col items-center md:items-start w-full">
-      <img src="./assets/imgs/home decor logo.svg" alt="Home Decor" class="h-25 w-auto mb-4">
 
       <!-- Social Media Box -->
       <div class="social-media flex space-x-3 mb-4">
@@ -175,9 +214,6 @@
   <div class="text-center py-5 text-white text-sm bg-black">
     © 2024 Home Decor. All rights reserved.
   </div>
-
-
-
 
 </body>
 

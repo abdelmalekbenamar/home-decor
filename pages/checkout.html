@@ -2,10 +2,235 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="./assets/imgs/Favicon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="../assets/css/checkoutStyles.css">
+    <title>Checkout</title>
 </head>
-<body>
+<body class="relative">
+    <!-- Header -->
+    <div class="flex items-center justify-between p-4 shadow-md bg-white md:px-20">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <img src="../assets/imgs/home decor logo.svg" alt="Home Decor" class="h-120 w-120">
+      </div>
+      <!-- Nav Menu -->
+      <nav class="hidden md:flex space-x-6 text-gray-800 font-medium">
+        <a href="../index.html" class="hover:text-yellow-500 text-yellow-500">Home</a>
+        <a href="./pages/shop.html" class="hover:text-yellow-500">Shop</a>
+        <a href="./pages/contact.html" class="hover:text-yellow-500">Contact</a>
+        <a href="./pages/about.html" class="hover:text-yellow-500">About</a>
+        <a href="./pages/checkout.html" class="hover:text-yellow-500">Checkout</a>
+      </nav>
+      <!-- Icons -->
+      <div class="flex space-x-4 items-center">
+        <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
+          <i class="ri-shopping-cart-line text-white text-xl " id="cartIcon"></i>
+        </div>
+        <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
+          <i class="ri-heart-line text-white text-xl"></i>
+        </div>
+        <!-- Hamburger Menu Icon -->
+        <button id="menu-toggle" class="text-gray-800 md:hidden ">
+          <i class="ri-menu-3-line text-2xl"></i>
+        </button>
+      </div>
+    </div>
+  
+    <!-- Sidebar Menu -->
+    <aside id="sidebar"
+      class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+      <div class="flex justify-end p-4">
+        <button id="close-sidebar" class="text-gray-800">
+          <i class="ri-close-line text-2xl"></i>
+        </button>
+      </div>
+      <nav class="flex flex-col space-y-4 p-4 text-gray-800 font-medium">
+        <a href="./index.html" class="hover:text-yellow-500">Home</a>
+        <a href="./pages/shop.html" class="hover:text-yellow-500">Shop</a>
+        <a href="./pages/contact.html" class="hover:text-yellow-500">Contact</a>
+        <a href="./pages/about.html" class="hover:text-yellow-500">About</a>
+        <a href="./pages/checkout.html" class="hover:text-yellow-500">Checkout</a>
+      </nav>
+    </aside>
+  
+    <!-- Cart Sidebar Popup -->
+    <div id="cartSidebar"
+      class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+      <div class="p-4 flex-1">
+        <div class="cartHead flex justify-between items-center">
+          <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+          <i class="ri-close-line text-xl cursor-pointer" id="closeCartSidebar"></i>
+        </div>
+        <div class="cartProducts">
+          <p class="text-gray-500">No items in the cart</p>
+        </div>
+      </div>
+      <div class="p-4">
+        <button id="closeSidebar" class="w-full bg-yellow-500 text-white py-2 rounded-full">
+          <a href="./pages/checkout.html">Proceed to Checkout</a>
+        </button>
+      </div>
+    </div>
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden"></div>
+
+
+    <!-- Main section -->
+    <main class="p-10">
+        <section id="order" class="mx-auto my-[30px]">
+            <header class="un w-[115px] flex justify-between mb-[30px]">
+                <div class="disc text-[yellow] bg-[black] w-[30px] h-[30px] text-center rounded-[50%]">1</div>
+                <h2>Your Order</h2>
+            </header>
+            <div>
+                <h3 class="headerOfProduct w-[49%] inline-block p-2.5">Product</h3>
+                <h3 class="headerOfPrice w-[49%] inline-block text-right p-2.5">Subtotal</h3>
+                
+                <div id="checkoutProduct">
+
+                    <div class="productsAndPrices flex justify-between items-center p-2.5 border-t-[black] border-t border-solid">
+                        <div class="productAddMinusDel">
+                            <p class="delProductCheckout inline-block mr-2.5">X</p>
+                            <img class="imageOfCheckout w-10 inline-block mr-2.5" src="https://woodmart.b-cdn.net/furniture2/wp-content/uploads/sites/11/2023/04/wd-furniture-tables-prod-11-3.jpg" alt="">
+                            <div class="ajouterDeminuerProduct inline-block mr-2.5 inline-flex w-[70px] justify-between px-2.5 rounded-[30px] border-[solid] border-[1px]">
+                                <div id="moin">-</div>
+                                <div id="numPiece" class="w-5 text-center border-x-[black] border-l border-solid border-r">1</div>
+                                <div id="plus">+</div>
+                            </div>
+                        </div>
+                        <div class="lePrixProduct">1458</div>
+                    </div>
+
+                    <div class="productsAndPrices flex justify-between items-center p-2.5 border-t-[black] border-t border-solid">
+                        <div class="productAddMinusDel">
+                            <p class="delProductCheckout inline-block mr-2.5">X</p>
+                            <img class="imageOfCheckout w-10 inline-block mr-2.5" src="https://woodmart.b-cdn.net/furniture2/wp-content/uploads/sites/11/2023/04/wd-furniture-tables-prod-11-3.jpg" alt="">
+                            <div class="ajouterDeminuerProduct inline-block mr-2.5 inline-flex w-[70px] justify-between px-2.5 rounded-[30px] border-[solid] border-[1px]">
+                                <div id="moin">-</div>
+                                <div id="numPiece" class="w-5 text-center border-x-[black] border-l border-solid border-r">1</div>
+                                <div id="plus">+</div>
+                            </div>
+                        </div>
+                        <div class="lePrixProduct">1458</div>
+                    </div>
+                    
+                    <div class="productsAndPrices flex justify-between items-center p-2.5 border-t-[black] border-t border-solid">
+                        <div class="productAddMinusDel">
+                            <p class="delProductCheckout inline-block mr-2.5">X</p>
+                            <img class="imageOfCheckout w-10 inline-block mr-2.5" src="https://woodmart.b-cdn.net/furniture2/wp-content/uploads/sites/11/2023/04/wd-furniture-tables-prod-11-3.jpg" alt="">
+                            <div class="ajouterDeminuerProduct inline-block mr-2.5 inline-flex w-[70px] justify-between px-2.5 rounded-[30px] border-[solid] border-[1px]">
+                                <div id="moin">-</div>
+                                <div id="numPiece" class="w-5 text-center border-x-[black] border-l border-solid border-r">1</div>
+                                <div id="plus">+</div>
+                            </div>
+                        </div>
+                        <div class="lePrixProduct">1458</div>
+                    </div>
+
+                    
+                </div>
+                <div class="laSommeDesProduits flex justify-between border-t-[black] border-t border-solid p-2.5">
+                    <p>Total</p>
+                    <p>123654</p>
+                </div>
+            </div>
+        </section>
+        <section id="payement" class="mx-auto my-[30px]">
+            <header class="deux w-[195px] flex justify-between">
+                <div class="disc text-[yellow] bg-[black] w-[30px] h-[30px] text-center rounded-[50%]">2</div>
+                <h2>Payement Information</h2>
+            </header>
+            <div class="radioInformation">
+                <label class="block m-2.5" for=""><input class="mr-[5px]" type="radio" name="payement">Direct Bank transfer</label>
+                <label class="block m-2.5" for=""><input class="mr-[5px]" type="radio" name="payement">Check Payement</label>
+                <label class="block m-2.5" for=""><input class="mr-[5px]" type="radio" name ="payement">Cash on delivery</label>
+                <button class="block bg-[yellow] w-[200px] mx-auto my-[30px] p-[5px] rounded-[40px]">Place Order</button>
+            </div>
+
+        </section>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-black py-10 px-5 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <!-- Company Box -->
+        <div class="box1 flex flex-col items-center md:items-start w-full">
+          <img src="./assets/imgs/home decor logo.svg" alt="Home Decor" class="h-25 w-auto mb-4">
+    
+          <!-- Social Media Box -->
+          <div class="social-media flex space-x-3 mb-4">
+            <div class="facebook bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+              <i class="ri-facebook-fill text-xl"></i>
+            </div>
+            <div class="instagram bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+              <i class="ri-instagram-line text-xl"></i>
+            </div>
+            <div class="x bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+              <i class="ri-twitter-x-line text-xl"></i>
+            </div>
+            <div class="linkedin bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+              <i class="ri-linkedin-fill text-xl"></i>
+            </div>
+          </div>
+    
+          <!-- Newsletter Box -->
+          <input type="email" placeholder="Your email address"
+            class="rounded-full border-yellow-500 border p-2 text-center bg-transparent  w-2/4 placeholder-white mt-3 mb-2 sm:w-/4">
+          <button type="submit" class="bg-yellow-500 rounded-full text-black font-medium  w-2/4 py-2 px-6 ">Join
+            Now</button>
+        </div>
+    
+        <!-- Links Boxes -->
+        <div class="grid grid-cols-2 gap-10 text-center md:text-left">
+          <div class="box2">
+            <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Pages</h5>
+            <ul class="space-y-2 text-white">
+              <li><a href="./index.html" class="hover:underline">Home</a></li>
+              <li><a href="./pages/shop.html" class="hover:underline">Shop</a></li>
+              <li><a href="./pages/contact.html" class="hover:underline">Contact</a></li>
+              <li><a href="./pages/about.html" class="hover:underline">About us</a></li>
+            </ul>
+          </div>
+          <div class="box3">
+            <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Links</h5>
+            <ul class="space-y-2 text-white">
+              <li><a href="./pages/checkout.html" class="hover:underline">Checkout</a></li>
+              <li><a href="./pages/cart.html" class="hover:underline">Cart</a></li>
+              <li><a href="./pages/about.html" class="hover:underline">FAQ</a></li>
+              <li><a href="#" class="hover:underline">Wishlist</a></li>
+            </ul>
+          </div>
+        </div>
+    
+        <div class="grid grid-cols-2 gap-10 text-center md:text-left">
+          <div class="box4">
+            <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Policies</h5>
+            <ul class="space-y-2 text-white">
+              <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+              <li><a href="#" class="hover:underline">Terms of Service</a></li>
+              <li><a href="#" class="hover:underline">Cookie Policy</a></li>
+              <li><a href="#" class="hover:underline">Refund</a></li>
+            </ul>
+          </div>
+    
+          <div class="box5 mb-20">
+            <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Help</h5>
+            <ul class="space-y-2 text-white">
+              <li><a href="./pages/contact.html" class="hover:underline">Support</a></li>
+              <li><a href="mailto:contact@homedecor.com" class="hover:underline">Email</a></li>
+              <li><a href="tel:+212 772508881" class="hover:underline">Phone Number</a></li>
+              <li><a href="./pages/blog.html" class="hover:underline">Blog</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    
+      <div class="text-center py-5 text-white text-sm bg-black">
+        © 2024 Home Decor. All rights reserved.
+      </div>
     
 </body>
 </html>

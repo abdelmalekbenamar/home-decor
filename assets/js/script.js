@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 // Nav SideBar Menu  //
 const menuToggle = document.getElementById("menu-toggle");
 const closeSidebar = document.getElementById("close-sidebar");
@@ -76,4 +74,3 @@ function displayProducts(products) {
   });
 }
 getProducts();
->>>>>>> Stashed changes

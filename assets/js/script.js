@@ -74,3 +74,7 @@ function displayProducts(products) {
   });
 }
 getProducts();
+
+// Add to cart function 
+
+let myCart=[];

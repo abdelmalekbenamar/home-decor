@@ -87,7 +87,7 @@
 
     <!-- shop -->
     <section class=" w-full  ">
-        <div class="bg-black w-5/6  p-3 justify-self-center rounded-lg  m-6 mt-20 md:flex justify-between md:p-5">
+        <div class="bg-black w-5/6  p-3 justify-self-center  rounded-lg  m-6 mt-20 md:flex justify-between md:p-5">
             <div class="flex justify-between md:w-2/5 ">
                 <input class="w-4/5 rounded-l-md p-1" type="text" placeholder="Search for products">
                 <button class="w-1/5 bg-white border border-black rounded-r-md"><i class="ri-search-line"></i></button>
@@ -110,10 +110,10 @@
 
             <!-- Prodcuts Grid -->
             <div class="grid grid-cols-2  lg:grid-cols-4 gap-2 lg:gap-6 md:grid-cols-3" id="shopProductsGrid">
-                <!-- products cards with js -->
+               
             </div>
         </div>
-        <!-- Product cards -->
+        <!-- Product pagination -->
         </div>
         <div class="justify-self-center mt-6 mb-6">
             <button id="prevButton"
@@ -125,6 +125,15 @@
                     class="ri-skip-right-line"></i></button>
         </div>
     </section>
+
+
+    <section id="newSliderSection" class="w-full pt-6 pb-10 px-8 bg-black justify-self-center my-5 lg:my-20 md:my-10">
+        <h2 class="text-xl text-white font-bold mb-4">Produits en vedette</h2>
+        <div id="newSlider" class="flex space-x-8 overflow-x-scroll">
+            
+        </div>
+    </section>
+    
 
 
 

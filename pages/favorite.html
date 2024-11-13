@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/script.js" defer></script>
+    <script src="../assets/js/wishlist.js" defer></script>
     <title>Home Decor - Wishlist</title>
 </head>
 
@@ -137,7 +138,7 @@
                             <button id="add-to-card"
                                 class="bg-amber-500 hover:bg-yellow-700 rounded-2xl text-sm px-7 py-1 shadow-sm text-white box-border text-nowrap">Add
                                 to cart</button>
-                            <button id="remove-from-wishlist"><i class="fa-regular fa-trash-can" style="color: #6f6648 ;"></i></button>
+                            <button onclick="addToWishlist()" id="remove-from-wishlist"><i class="fa-regular fa-trash-can" style="color: #6f6648 ;"></i></button>
                         </div>
                     </div>
 
@@ -276,7 +277,6 @@
 
 
 
-<script src="../assets/js/wishlist.js"></script>
 </body>
 
 </html>

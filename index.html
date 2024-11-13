@@ -9,6 +9,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="./assets/js/script.js" defer></script>
   <title>Home Decor - Furniture and Home Decor Store</title>
+
 </head>
 <body class="relative">
   <!-- Header -->
@@ -59,13 +60,13 @@
 
   <!-- Cart Sidebar Popup -->
   <div id="cartSidebar"
-    class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+    class="fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
     <div class="p-4 flex-1">
       <div class="cartHead flex justify-between items-center">
-        <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+        <h2 class="text-xl font-bold mb-4">Shopping cart</h2>
         <i class="ri-close-line text-xl cursor-pointer" id="closeCartSidebar"></i>
       </div>
-      <div class="cartProducts">
+      <div id="cartProducts"class="overflow-y-scroll max-h-[calc(100vh-200px)]">
         <p class="text-gray-500">No items in the cart</p>
       </div>
     </div>

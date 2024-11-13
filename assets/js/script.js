@@ -48,22 +48,38 @@ async function getProducts() {
   localStorage.setItem("data", JSON.stringify(data.products));
 }
 
-// Add to cart function
+// Add to cart function and Quantiy update
 function addToCart(id) {
   let cartProduct;
   const data = JSON.parse(localStorage.getItem("data"));
   let myCart = JSON.parse(localStorage.getItem("cart")) || [];
   console.log(id);
+
   for (let i = 0; i < data.length; i++) {
     if (data[i].id == id) {
       cartProduct = data[i];
+      break; 
     }
   }
 
-  myCart.push(cartProduct);
+  let productExists = false;
+  for (let i = 0; i < myCart.length; i++) {
+    if (myCart[i].id == id) {
+      myCart[i].quantity = (myCart[i].quantity || 1) + 1;
+      productExists = true;
+      break;
+    }
+  }
+
+  if (!productExists) {
+    myCart.push({ ...cartProduct, quantity: 1 });
+  }
   localStorage.setItem("cart", JSON.stringify(myCart));
   displayCartProducts();
+  displaySubtotal()
+  UpdateItemsNumber()
 }
+
 
 // delete product from cart popup
 const deleteProduct = document.getElementById("deleteProduct");
@@ -79,6 +95,8 @@ function deleteCartProduct(deleteId) {
   }
   localStorage.setItem("cart", JSON.stringify(myCart));
   displayCartProducts();
+  displaySubtotal()
+  UpdateItemsNumber()
 }
 
 // display cart products in cart modal
@@ -89,22 +107,23 @@ function displayCartProducts() {
   if (myCart.length == 0) {
     cartPopup.innerHTML = `No items in the cart`;
   } else {
-    myCart.forEach((product) => {
+      myCart.forEach((product) => {
       const productCard = document.createElement("div");
-      productCard.className =
-        "flex gap-4 p-4 border rounded-xl mt-5 mr-2 items-center relative";
-
+      productCard.className = "flex gap-4 p-4 border rounded-xl mt-5 mr-2 items-center relative";
       productCard.innerHTML = `
       <i class="ri-close-line absolute right-3 text-red-600 top-2" id="deleteProduct" onclick="deleteCartProduct(${product.id})"></i>
        <img src="${product.img1}" height="60px" width="60px">
           <div>
             <h2 class="font-semibold">${product.title}</h2>
-            <p>${product.prix}</p>
+            <p>${product.quantity} × ${product.prix}</p>
           </div>`;
       cartPopup.appendChild(productCard);
     });
   }
+  displaySubtotal();
+  UpdateItemsNumber()
 }
+
 
 // display products grid
 const productsGrid = document.getElementById("productsGrid");
@@ -140,3 +159,5 @@ function displayProducts(products) {
 }
 getProducts();
 displayCartProducts();
+displaySubtotal()
+// UpdateItemsNumber()

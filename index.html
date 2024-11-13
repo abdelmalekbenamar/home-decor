@@ -1,12 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./assets/imgs/Favicon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./assets/js/script.js" defer></script>
+  <title>Home Decor - Furniture and Home Decor Store</title>
 </head>
-<body>
-    
+<body class="relative">
+  <!-- Header -->
+  <div class="flex items-center justify-between p-4 shadow-md bg-white md:px-20">
+    <!-- Logo -->
+    <div class="flex items-center space-x-2">
+      <img src="./assets/imgs/home decor logo.svg" alt="Home Decor" class="h-120 w-120">
+    </div>
+    <!-- Nav Menu -->
+    <nav class="hidden md:flex space-x-6 text-gray-800 font-medium">
+      <a href="./index.html" class="hover:text-yellow-500 text-yellow-500">Home</a>
+      <a href="./pages/shop.html" class="hover:text-yellow-500">Shop</a>
+      <a href="./pages/contact.html" class="hover:text-yellow-500">Contact</a>
+      <a href="./pages/about.html" class="hover:text-yellow-500">About</a>
+      <a href="./pages/checkout.html" class="hover:text-yellow-500">Checkout</a>
+    </nav>
+    <!-- Icons -->
+    <div class="flex space-x-4 items-center">
+      <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
+        <i class="ri-shopping-cart-line text-white text-xl " id="cartIcon"></i>
+      </div>
+      <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
+        <i class="ri-heart-line text-white text-xl"></i>
+      </div>
+      <!-- Hamburger Menu Icon -->
+      <button id="menu-toggle" class="text-gray-800 md:hidden ">
+        <i class="ri-menu-3-line text-2xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Sidebar Menu -->
+  <aside id="sidebar"
+    class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 z-50">
+    <div class="flex justify-end p-4">
+      <button id="close-sidebar" class="text-gray-800">
+        <i class="ri-close-line text-2xl"></i>
+      </button>
+    </div>
+    <nav class="flex flex-col space-y-4 p-4 text-gray-800 font-medium">
+      <a href="./index.html" class="hover:text-yellow-500">Home</a>
+      <a href="./pages/shop.html" class="hover:text-yellow-500">Shop</a>
+      <a href="./pages/contact.html" class="hover:text-yellow-500">Contact</a>
+      <a href="./pages/about.html" class="hover:text-yellow-500">About</a>
+      <a href="./pages/checkout.html" class="hover:text-yellow-500">Checkout</a>
+    </nav>
+  </aside>
+
+  <!-- Cart Sidebar Popup -->
+  <div id="cartSidebar"
+    class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+    <div class="p-4 flex-1">
+      <div class="cartHead flex justify-between items-center">
+        <h2 class="text-xl font-bold mb-4">Your Cart</h2>
+        <i class="ri-close-line text-xl cursor-pointer" id="closeCartSidebar"></i>
+      </div>
+      <div class="cartProducts">
+        <p class="text-gray-500">No items in the cart</p>
+      </div>
+    </div>
+    <div class="p-4">
+      <button id="closeSidebar" class="w-full bg-yellow-500 text-white py-2 rounded-full">
+        <a href="./pages/checkout.html">Proceed to Checkout</a>
+      </button>
+    </div>
+  </div>
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden"></div>
+  
+  <!-- Hero Section -->
+  <div class="m-10 sm:m-0 h-[500px] rounded-2xl relative bg-cover bg-center lg:m-20"
+    style="background-image: url('./assets/imgs/hero.webp');">
+
+    <div class="rounded-2xl absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div class="text-center px-6 sm:px-12">
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-yellow-400 mb-4">
+          Discover the Top Furniture Trends of 2024
+        </h1>
+        <p class="text-base sm:text-lg lg:text-xl text-white mb-8 lg:mx-80">
+          Discover a world of exquisite furniture and decor crafted to bring style, comfort, and personality to your
+          space. At Home Decor
+        </p>
+        <a href="#"
+          class="bg-yellow-400 text-black font-semibold py-3 px-6 rounded-full hover:bg-white transition-colors"> Shop
+          Now </a>
+      </div>
+    </div>
+  </div>
+
+    <!-- Products Categories Section -->
+    <div class="lg:m-20 md:m-10 m-4 sm:m-0">
+      <!-- Categories Heading -->
+      <div class="py-8 mb-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold relative inline-block ">Our categories
+          <span class="absolute inset-x-0 bottom-0 h-2 bg-yellow-400 -z-10"></span>
+        </h2>
+      </div>
+      <!-- Categories Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 px-4">
+        <!-- Chairs -->
+        <div
+          class="relative w-40 h-40 sm:w-80 sm:h-80 mx-auto rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img src="./assets/imgs/1.png" alt="Chairs" class="w-full h-full object-cover">
+          <span
+            class="absolute flex items-center justify-center bg-white py-2 px-4 text-sm font-medium rounded-full md:text-xl">Chairs</span>
+        </div>
+        <!-- Tables -->
+        <div
+          class="relative w-40 h-40 sm:w-80 sm:h-80 mx-auto rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img src="./assets/imgs/2.png" alt="Chairs" class="w-full h-full object-cover">
+          <span
+            class="absolute flex items-center justify-center bg-white py-2 px-4 text-sm font-medium rounded-full md:text-xl">Tables</span>
+        </div>
+        <!-- Sofas -->
+        <div
+          class="relative w-40 h-40 sm:w-80 sm:h-80 mx-auto rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img src="./assets/imgs/3.png" alt="Chairs" class="w-full h-full object-cover">
+          <span
+            class="absolute flex items-center justify-center bg-white py-2 px-4 text-sm font-medium rounded-full md:text-xl">Sofas</span>
+        </div>
+        <!-- Beds -->
+        <div
+          class="relative w-40 h-40 sm:w-80 sm:h-80 mx-auto rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
+          <img src="./assets/imgs/4.png" alt="Chairs" class="w-full h-full object-cover">
+          <span
+            class="absolute flex items-center justify-center bg-white py-2 px-4 text-sm font-medium rounded-full md:text-xl">Beds</span>
+        </div>
+      </div>
+    </div>
+
+<!-- Products Grid Section -->
+<div class="lg:m-20 md:m-10 m-4 sm:m-0">
+  <!-- Section Heading -->
+  <div class="py-8 mb-4">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold relative inline-block ">Weekly bestsellers
+      <span class="absolute inset-x-0 bottom-0 h-2 bg-yellow-400 -z-10"></span>
+    </h2>
+  </div>
+  <!-- Prodcuts Grid -->
+   <div class="grid grid-cols-2  lg:grid-cols-4 gap-2 lg:gap-6 md:grid-cols-3" id="productsGrid">
+        <!-- products cards with js -->
+         </div>
+   </div>
+</div>
+
+<!-- Shop By Brands section -->
+<div class="lg:m-20 md:m-10 m-4 sm:m-0">
+  <!-- Section Heading -->
+  <div class="py-4 sm:py-8 mb-4">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold relative inline-block">
+      Shopping by brands
+      <span class="absolute inset-x-0 bottom-0 h-1 sm:h-2 bg-yellow-400 -z-10"></span>
+    </h2>
+  </div>
+
+  <!-- Brands Grid -->
+  <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 px-2 sm:px-4">
+
+    <!-- Ashley -->
+    <div class="h-[250px] sm:h-[300px] md:h-[450px] rounded-2xl bg-cover bg-center"
+      style="background-image: url('./assets/imgs/ashely.jpg');">
+      <div class="p-2 sm:m-8 flex items-center">
+        <!-- Brand logo -->
+        <div class="h-12 w-12 sm:h-20 sm:w-20 bg-white rounded-full flex justify-center items-center">
+          <img src="./assets/imgs/Ashley-logo.svg" alt="Ashley logo" class="h-8 sm:h-10 md:h-12">
+        </div>
+        <!-- Brand Title -->
+        <div class="ml-4 sm:ml-6">
+          <h2 class="font-bold text-lg sm:text-2xl text-white">Ashley</h2>
+          <p class="text-gray-300 text-sm sm:text-base">Furniture</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- West Elm -->
+    <div class="h-[250px] sm:h-[300px] md:h-[450px] rounded-2xl bg-cover bg-center"
+      style="background-image: url('./assets/imgs/West\ elm.jpg');">
+      <div class="p-2 sm:m-8 flex items-center">
+        <!-- Brand logo -->
+        <div class="h-12 w-12 sm:h-20 sm:w-20 bg-white rounded-full flex justify-center items-center">
+          <img src="./assets/imgs/i-593-1346844990024-23_hd 1.svg" alt="West Elm logo" class="h-8 sm:h-10 md:h-12">
+        </div>
+        <!-- Brand Title -->
+        <div class="ml-4 sm:ml-6">
+          <h2 class="font-bold text-lg sm:text-2xl text-white">West Elm</h2>
+          <p class="text-gray-300 text-sm sm:text-base">Furniture</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pottery -->
+    <div class="h-[250px] sm:h-[300px] md:h-[450px] rounded-2xl bg-cover bg-center"
+      style="background-image: url('./assets/imgs/Pottery.jpg');">
+      <div class="p-2 sm:m-8 flex items-center">
+        <!-- Brand logo -->
+        <div class="h-12 w-12 sm:h-20 sm:w-20 bg-white rounded-full flex justify-center items-center">
+          <img src="./assets/imgs/PotteryBarn-logo 1.svg" alt="Pottery logo" class="h-8 sm:h-10 md:h-12">
+        </div>
+        <!-- Brand Title -->
+        <div class="ml-4 sm:ml-6">
+          <h2 class="font-bold text-lg sm:text-2xl text-white">Pottery</h2>
+          <p class="text-gray-300 text-sm sm:text-base">Barn</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CB2 -->
+    <div class="h-[250px] sm:h-[300px] md:h-[450px] rounded-2xl bg-cover bg-center"
+      style="background-image: url('./assets/imgs/CB2.jpg');">
+      <div class="p-2 sm:m-8 flex items-center">
+        <!-- Brand logo -->
+        <div class="h-12 w-12 sm:h-20 sm:w-20 bg-white rounded-full flex justify-center items-center">
+          <img src="./assets/imgs/CB2.svg" alt="CB2 logo" class="h-3 sm:h-5 md:h-5">
+        </div>
+        <!-- Brand Title -->
+        <div class="ml-4 sm:ml-6">
+          <h2 class="font-bold text-lg sm:text-2xl text-white">CB2</h2>
+          <p class="text-gray-300 text-sm sm:text-base">Furniture</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Hotspots Products Collection -->
+<div class="lg:m-20 md:m-10 m-4 sm:m-0">
+  <!-- Heading -->
+  <div class="py-4 sm:py-8 mb-4">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold relative inline-block">
+      Product Collections
+      <span class="absolute inset-x-0 bottom-0 h-1 sm:h-2 bg-yellow-400 -z-10"></span>
+    </h2>
+  </div>
+
+  <!-- Collections Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-2 sm:px-5">
+    <!-- Column 1 -->
+    <div class="space-y-3">
+      <img src="./assets/imgs/Rectangle 169.png" alt="Product 1" class="w-full h-auto object-cover rounded-lg">
+      <img src="./assets/imgs/col2.png" alt="Product 2" class="w-full h-auto object-cover rounded-lg">
+    </div>
+
+    <!-- Column 2 -->
+    <div class="space-y-3">
+      <img src="./assets/imgs/col3.png" alt="Product 3" class="w-full h-auto object-cover rounded-lg">
+      <div class="rounded-2xl bg-no-repeat bg-cover p-4 overflow-hidden"
+        style="background-image: url('./assets/imgs/col-bg.png');">
+        <h2 class="font-semibold text-lg">Home Decor</h2>
+        <p class="text-sm mt-2">We believe that every home deserves a touch of style and comfort.</p>
+      </div>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="space-y-3">
+      <img src="./assets/imgs/col4.png" alt="Product 4" class="w-full h-auto object-cover rounded-lg">
+      <img src="./assets/imgs/col5.png" alt="Product 5" class="w-full h-auto object-cover rounded-lg">
+    </div>
+
+    <!-- Column 4 -->
+    <div class="space-y-3">
+      <img src="./assets/imgs/col6.png" alt="Product 6" class="w-full h-auto object-cover rounded-lg">
+      <img src="./assets/imgs/col7.png" alt="Product 7" class="w-full h-auto object-cover rounded-lg">
+    </div>
+
+    <!-- Column 5 -->
+    <div class="space-y-3">
+      <div class="rounded-2xl bg-no-repeat bg-cover p-4 lg:p-8 overflow-hidden"
+        style="background-image: url('./assets/imgs/col-bg-2.png');">
+        <h2 class="font-semibold text-lg">Home Decor</h2>
+        <p class="text-sm mt-2">Specializing in high-quality, elegant furniture and decor, we offer a carefully
+          curated selection that transforms spaces into beautiful, functional, and inviting places.</p>
+      </div>
+      <img src="./assets/imgs/col8.png" alt="Product 8" class="w-full h-auto object-cover rounded-lg">
+    </div>
+  </div>
+</div>
+
+
+<!-- Blog Section  -->
+<div class="lg:m-20 md:m-10 m-4 sm:m-0">
+  <!-- Blog Heading  -->
+  <div class="py-4 sm:py-8 mb-4">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-semibold relative inline-block">
+      Our Blog
+      <span class="absolute inset-x-0 bottom-0 h-1 sm:h-2 bg-yellow-400 -z-10"></span>
+    </h2>
+  </div>
+  <!-- Acticles Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 px-2 sm:px-4">
+    <!-- Article 1 -->
+    <div class="flex flex-col bg-white rounded-2xl shadow-md overflow-hidden">
+      <div>
+        <img src="./assets/imgs/article 1.jpg" alt="article thumbnail">
+      </div>
+      <div class="p-5">
+        <h3 class="text-gray-400 text-sm mb-2">Design Trends 18/02/2024</h3>
+        <h2 class="text-black font-bold text-xl mb-1">2024 Furniture Trends</h2>
+        <p class="text-gray-700 mb-2">As we step into 2024, the world of furniture design is embracing both innovation
+          and nostalgia, blending
+          modern functionality ....</p>
+        <a href="#" class="text-yellow-500 font-semibold">Continue reading</a>
+      </div>
+    </div>
+    <!-- Article 2 -->
+    <div class="flex flex-col bg-white rounded-2xl shadow-md overflow-hidden">
+      <div>
+        <img src="./assets/imgs/article2.jpg" alt="article thumbnail">
+      </div>
+      <div class="p-5">
+        <h3 class="text-gray-400 text-sm mb-2">Decor 18/02/2024</h3>
+        <h2 class="text-black font-bold text-xl mb-1">Home Decor</h2>
+        <p class="text-gray-700 mb-2">As we step into 2024, the world of furniture design is embracing both innovation
+          and nostalgia, blending
+          modern functionality ....</p>
+        <a href="#" class="text-yellow-500 font-semibold">Continue reading</a>
+      </div>
+    </div>
+    <!-- Article 3 -->
+    <div class="flex flex-col bg-white rounded-2xl shadow-md overflow-hidden">
+      <div>
+        <img src="./assets/imgs/article3.jpg" alt="article thumbnail">
+      </div>
+      <div class="p-5">
+        <h3 class="text-gray-400 text-sm mb-2">Decor 09/03/2024</h3>
+        <h2 class="text-black font-bold text-xl mb-1">New Products Arrivals</h2>
+        <p class="text-gray-700 mb-2">As we step into 2024, the world of furniture design is embracing both innovation
+          and nostalgia, blending
+          modern functionality ....</p>
+        <a href="#" class="text-yellow-500 font-semibold">Continue reading</a>
+      </div>
+    </div>
+    <!-- Article 4 -->
+    <div class="flex flex-col bg-white rounded-2xl shadow-md overflow-hidden">
+      <div>
+        <img src="./assets/imgs/article4.jpg" alt="article thumbnail">
+      </div>
+      <div class="p-5">
+        <h3 class="text-gray-400 text-sm mb-2">3D Deisgn 29/10/2024</h3>
+        <h2 class="text-black font-bold text-xl mb-1">3D Kitchen Design</h2>
+        <p class="text-gray-700 mb-2">As we step into 2024, the world of furniture design is embracing both innovation
+          and nostalgia, blending
+          modern functionality ....</p>
+        <a href="#" class="text-yellow-500 font-semibold">Continue reading</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer Section -->
+  <footer class="bg-black py-10 px-5 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div class="box1 flex flex-col items-center md:items-start w-full">
+
+      <!-- Social Media Box -->
+      <div class="social-media flex space-x-3 mb-4">
+        <div class="facebook bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+          <i class="ri-facebook-fill text-xl"></i>
+        </div>
+        <div class="instagram bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+          <i class="ri-instagram-line text-xl"></i>
+        </div>
+        <div class="x bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+          <i class="ri-twitter-x-line text-xl"></i>
+        </div>
+        <div class="linkedin bg-yellow-500 w-10 h-10 rounded-full flex justify-center items-center">
+          <i class="ri-linkedin-fill text-xl"></i>
+        </div>
+      </div>
+
+      <!-- Newsletter Box -->
+      <input type="email" placeholder="Your email address"
+        class="rounded-full border-yellow-500 border p-2 text-center bg-transparent  w-2/4 placeholder-white mt-3 mb-2 sm:w-/4">
+      <button type="submit" class="bg-yellow-500 rounded-full text-black font-medium  w-2/4 py-2 px-6 ">Join
+        Now</button>
+    </div>
+
+    <!-- Links Boxes -->
+    <div class="grid grid-cols-2 gap-10 text-center md:text-left">
+      <div class="box2">
+        <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Pages</h5>
+        <ul class="space-y-2 text-white">
+          <li><a href="./index.html" class="hover:underline">Home</a></li>
+          <li><a href="./pages/shop.html" class="hover:underline">Shop</a></li>
+          <li><a href="./pages/contact.html" class="hover:underline">Contact</a></li>
+          <li><a href="./pages/about.html" class="hover:underline">About us</a></li>
+        </ul>
+      </div>
+      <div class="box3">
+        <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Links</h5>
+        <ul class="space-y-2 text-white">
+          <li><a href="./pages/checkout.html" class="hover:underline">Checkout</a></li>
+          <li><a href="./pages/cart.html" class="hover:underline">Cart</a></li>
+          <li><a href="./pages/about.html" class="hover:underline">FAQ</a></li>
+          <li><a href="#" class="hover:underline">Wishlist</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-10 text-center md:text-left">
+      <div class="box4">
+        <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Policies</h5>
+        <ul class="space-y-2 text-white">
+          <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+          <li><a href="#" class="hover:underline">Terms of Service</a></li>
+          <li><a href="#" class="hover:underline">Cookie Policy</a></li>
+          <li><a href="#" class="hover:underline">Refund</a></li>
+        </ul>
+      </div>
+
+      <div class="box5 mb-20">
+        <h5 class="text-yellow-500 font-semibold mb-3 text-xl">Help</h5>
+        <ul class="space-y-2 text-white">
+          <li><a href="./pages/contact.html" class="hover:underline">Support</a></li>
+          <li><a href="mailto:contact@homedecor.com" class="hover:underline">Email</a></li>
+          <li><a href="tel:+212 772508881" class="hover:underline">Phone Number</a></li>
+          <li><a href="./pages/blog.html" class="hover:underline">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <div class="text-center py-5 text-white text-sm bg-black">
+    © 2024 Home Decor. All rights reserved.
+  </div>
+
 </body>
+
 </html>

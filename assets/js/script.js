@@ -39,61 +39,76 @@ overlay.addEventListener("click", () => {
   overlay.classList.add("hidden");
 });
 
-// Products json file fetch 
+// Products json file fetch
 async function getProducts() {
   const response = await fetch("https://decor.codia-dev.com/products.json");
   const data = await response.json();
   displayProducts(data.products);
   console.log(data.products);
-  localStorage.setItem("data", JSON.stringify(data.products))
+  localStorage.setItem("data", JSON.stringify(data.products));
 }
 
 // Add to cart function
-function addToCart(id){
+function addToCart(id) {
   let cartProduct;
- const data = JSON.parse(localStorage.getItem("data"))
-  let myCart= JSON.parse(localStorage.getItem("cart")) || [] ;
+  const data = JSON.parse(localStorage.getItem("data"));
+  let myCart = JSON.parse(localStorage.getItem("cart")) || [];
   console.log(id);
-    for(let i =0; i<data.length;i++){    
-      if(data[i].id == id){
-        cartProduct = data[i];
-      }
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id == id) {
+      cartProduct = data[i];
     }
+  }
 
   myCart.push(cartProduct);
   localStorage.setItem("cart", JSON.stringify(myCart));
-  displayCartProducts()
-} 
+  displayCartProducts();
+}
 
-// display cart products in cart modal 
-function displayCartProducts(){
-  const cartPopup = document.getElementById('cartProducts');
-  const myCart = JSON.parse(localStorage.getItem("cart")) || [];
-  cartPopup.innerHTML="";
-  if(myCart.length==0){
-    cartPopup.innerHTML= `No items in the cart`;
+// delete product from cart popup
+const deleteProduct = document.getElementById("deleteProduct");
+function deleteCartProduct(deleteId) {
+  let myCart = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log(deleteId);
+  console.log("deleted");
+  for (let i = 0; i < myCart.length; i++) {
+    if (myCart[i].id == deleteId) {
+      myCart.splice(i, 1);
+      break;
+    }
   }
-  else{
-    myCart.forEach((product)=>{
-    const productCard = document.createElement('div');
-    productCard.className = "flex gap-4 p-4 border rounded-xl mt-5 mr-2 items-center relative";
+  localStorage.setItem("cart", JSON.stringify(myCart));
+  displayCartProducts();
+}
 
-    productCard.innerHTML=`
+// display cart products in cart modal
+function displayCartProducts() {
+  const cartPopup = document.getElementById("cartProducts");
+  const myCart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartPopup.innerHTML = "";
+  if (myCart.length == 0) {
+    cartPopup.innerHTML = `No items in the cart`;
+  } else {
+    myCart.forEach((product) => {
+      const productCard = document.createElement("div");
+      productCard.className =
+        "flex gap-4 p-4 border rounded-xl mt-5 mr-2 items-center relative";
+
+      productCard.innerHTML = `
       <i class="ri-close-line absolute right-3 text-red-600 top-2" id="deleteProduct" onclick="deleteCartProduct(${product.id})"></i>
        <img src="${product.img1}" height="60px" width="60px">
           <div>
             <h2 class="font-semibold">${product.title}</h2>
             <p>${product.prix}</p>
-          </div>`
-      cartPopup.appendChild(productCard) ;   
-    })
+          </div>`;
+      cartPopup.appendChild(productCard);
+    });
   }
 }
 
-
 // display products grid
 const productsGrid = document.getElementById("productsGrid");
- function displayProducts(products) {
+function displayProducts(products) {
   const displyedProducts = products.slice(0, 12);
   productsGrid.innerHTML = "";
   displyedProducts.forEach((product) => {
@@ -118,9 +133,10 @@ const productsGrid = document.getElementById("productsGrid");
   });
 
   document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
-    btn.addEventListener("click", () => addToCart(parseInt(btn.getAttribute("data-id"))));
+    btn.addEventListener("click", () =>
+      addToCart(parseInt(btn.getAttribute("data-id")))
+    );
   });
 }
 getProducts();
-displayCartProducts()
-
+displayCartProducts();

@@ -24,4 +24,12 @@ async function getProducts() {
 
 function afficher() {
     Top_p.innerHTML = "";
+    const topProducts = allProducts.slice(0, products);
+    topProducts.forEach((product) => {
+        const productContainer = document.createElement("div");
+        productContainer.className = "product-container flex flex-col md:flex-row items-start mb-10 gap-10"; 
+
+    });
+
+
 }

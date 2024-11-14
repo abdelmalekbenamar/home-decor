@@ -29,6 +29,8 @@ function afficher() {
         const productContainer = document.createElement("div");
         productContainer.className = "product-container flex flex-col md:flex-row items-start mb-10 gap-10"; 
 
+        const productCard = document.createElement("div");
+        productCard.className = "border border-gray-200 rounded-lg overflow-hidden shadow-lg bg-white w-full md:w-1/2";  
     });
 
 

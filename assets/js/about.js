@@ -31,6 +31,17 @@ function afficher() {
 
         const productCard = document.createElement("div");
         productCard.className = "border border-gray-200 rounded-lg overflow-hidden shadow-lg bg-white w-full md:w-1/2";  
+        productCard.innerHTML = `
+            <img src="${product.img1}" alt="${product.title}" class="w-full h-32 object-cover md:h-48">
+            <div class="px-4 pt-4 flex justify-between">
+                <h3 class="text-sm font-bold md:text-lg">${product.title}</h3>  
+                <i class="ri-heart-line text-sm md:text-xl"></i>
+            </div>
+            <p class="text-gray-400 text-xs uppercase px-4 underline md:text-sm">${product.category}</p>
+            <div class="p-4 flex flex-col md:flex-row justify-between">
+                <p class="text-black font-bold text-sm md:text-lg md:mt-2">$${product.prix}</p>
+                <button class="bg-yellow-500 py-1 px-3 rounded-md font-semibold text-xs md:text-base mt-2">Add to cart</button>
+            </div>`;
     });
 
 

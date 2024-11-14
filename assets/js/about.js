@@ -23,5 +23,5 @@ async function getProducts() {
 }
 
 function afficher() {
-    
+    Top_p.innerHTML = "";
 }

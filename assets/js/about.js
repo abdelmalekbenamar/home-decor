@@ -14,7 +14,8 @@ async function getProducts() {
         
         allProducts = data.products;
 
-        
+        afficher();
+
 
     } catch (error) {
         
@@ -48,7 +49,9 @@ function afficher() {
             <p class="text-black-600 text-base text-center md:mt-6">${product.description}</p>`;
         productContainer.appendChild(productCard);
         productContainer.appendChild(productDescription);
+        Top_p.appendChild(productContainer);
     });
 
-
 }
+
+    getProducts();

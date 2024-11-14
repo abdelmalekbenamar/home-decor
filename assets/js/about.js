@@ -21,3 +21,7 @@ async function getProducts() {
         console.error("Erreur lors de la récupération des produits :", error);
     }
 }
+
+function afficher() {
+    
+}

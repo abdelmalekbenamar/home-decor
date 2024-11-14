@@ -42,6 +42,10 @@ function afficher() {
                 <p class="text-black font-bold text-sm md:text-lg md:mt-2">$${product.prix}</p>
                 <button class="bg-yellow-500 py-1 px-3 rounded-md font-semibold text-xs md:text-base mt-2">Add to cart</button>
             </div>`;
+        const productDescription = document.createElement("div");
+        productDescription.className = "product-description w-full h-full md:w-1/2 px-4 flex items-center";
+        productDescription.innerHTML = `
+            <p class="text-black-600 text-base text-center md:mt-6">${product.description}</p>`;
     });
 
 

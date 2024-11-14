@@ -46,6 +46,8 @@ function afficher() {
         productDescription.className = "product-description w-full h-full md:w-1/2 px-4 flex items-center";
         productDescription.innerHTML = `
             <p class="text-black-600 text-base text-center md:mt-6">${product.description}</p>`;
+        productContainer.appendChild(productCard);
+        productContainer.appendChild(productDescription);
     });
 
 

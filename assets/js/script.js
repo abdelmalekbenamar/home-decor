@@ -124,6 +124,35 @@ function displayCartProducts() {
   UpdateItemsNumber()
 }
 
+// Update Items Cart Span
+const itemsNumber = document.getElementById('itemsNumber');
+function UpdateItemsNumber(){
+    let itemsTotal = 0 ;
+    const myCart = JSON.parse(localStorage.getItem("cart")) || [];
+    for(let i=0 ; i<myCart.length ; i++){
+      itemsTotal += myCart[i].quantity ;
+    }
+    console.log(itemsTotal);
+    itemsNumber.innerHTML = `${itemsTotal}`;
+}
+
+// display subtotal 
+const subtotal = document.getElementById('subtotal');
+function displaySubtotal(){
+  let total = 0;
+  const myCart = JSON.parse(localStorage.getItem("cart")) || [];
+  subtotal.innerHTML="";
+  for(let i=0 ; i<myCart.length ; i++){
+    const prix = parseFloat(myCart[i].prix);
+    const quantity = parseInt(myCart[i].quantity);
+    total += prix * quantity;
+  }
+  console.log(total);
+  subtotal.innerHTML=`
+  <h2 class="font-semibold text-xl">Subtotal:</h2>
+  <p class="text-yellow-500 text-xl">${total} $</p>
+  `
+}
 
 // display products grid
 const productsGrid = document.getElementById("productsGrid");

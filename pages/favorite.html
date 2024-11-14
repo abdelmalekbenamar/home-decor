@@ -82,35 +82,42 @@
     <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden"></div>
 
     <!-- Favorite page -->
+    <header class="grid py-2">
+        <h1 class="text-3xl text-center font-serif">Wishlist</h1>
+        <span class="flex justify-between px-3 w-[80%] mx-auto">
+            <h2 id="counter">Total: </h2>
+            <button id="add-all-to-cart" class="justify-self-end h-7 rounded-xl px-3 bg-gray-200 shadow-lg"><i
+                    class="fa-solid fa-cart-plus"></i>&nbsp;Add all to cart</button>
+        </span>
+    </header>
+
+    <!-- Products Grid Section -->
+    <div class="w-5/6 justify-self-center m-6 lg:m-20 md:m-10 sm:m-0">
+        <!-- Prodcuts Grid -->
+        <div class="grid grid-cols-2  lg:grid-cols-4 gap-2 lg:gap-6 md:grid-cols-3" id="favProductsGrid">
+           
+        </div>
+    </div>
+
     <section>
-
-        <header class="grid py-2">
-            <h1 class="text-3xl text-center font-serif">Wishlist</h1>
-            <span class="flex justify-between px-3">
-                <h2 id="counter">Total: </h2>
-                <button id="add-all-to-cart" class="justify-self-end h-7 rounded-xl px-3 bg-gray-200 shadow-lg"><i
-                        class="fa-solid fa-cart-plus"></i>&nbsp;Add all to cart</button>
-            </span>
-        </header>
-
-        <main>
+        <!-- <main>
             <div id="cartes" class="grid grid-cols-2  m-3 gap-2 md:grid-cols-3 lg:grid-cols-4">
 
                 <div id="carte" class="flex flex-col rounded-md shadow-lg">
-                    <div class="mx-auto"> <!--Image-->
+                    <div class="mx-auto"> 
                         <img src="../assets/imgs/F-N02.png" alt="#">
                     </div>
                     <div class="px-2">
-                        <span class="flex justify-around my-3"> <!--Title-->
+                        <span class="flex justify-around my-3"> 
                             <b>Curve</b>
                             <p>4.5 <i class="fa-solid fa-star" style="color: #FFD43B;"></i></p>
                         </span>
                         <p class="text-sm text-center opacity-60">Chairs</p>
-                        <div class="m-3 flex flex-col"> <!--Index-->
+                        <div class="m-3 flex flex-col"> 
                             <p class="text-blue-700"></p>
                             <p class="text-amber-600 self-center">319.99$</p>
                         </div>
-                        <div class="flex justify-evenly my-3 flex-wrap"> <!--Btn-->
+                        <div class="flex justify-evenly my-3 flex-wrap"> 
                             <button onclick="addToCart()"
                                 class="bg-amber-500 hover:bg-yellow-700 rounded-2xl text-sm px-7 py-1 shadow-sm text-white box-border text-nowrap">Add
                                 to cart</button>
@@ -121,20 +128,20 @@
                 </div>
 
                 <div id="carte" class="flex flex-col rounded-md shadow-lg">
-                    <div class="mx-auto"> <!--Image-->
+                    <div class="mx-auto"> 
                         <img src="../assets/imgs/F-N03.png" alt="#">
                     </div>
                     <div class="px-2">
-                        <span class="flex justify-around my-3"> <!--Title-->
+                        <span class="flex justify-around my-3"> 
                             <b>Can</b>
                             <p>4.5<i class="fa-solid fa-star" style="color: #FFD43B;"></i></p>
                         </span>
                         <p class="text-sm text-center opacity-60">Sofas</p>
-                        <div class="m-3 flex flex-col"> <!--Index-->
+                        <div class="m-3 flex flex-col"> 
                             <p class="text-blue-700"></p>
                             <p class="text-amber-600 self-center">2,099.99$</p>
                         </div>
-                        <div class="flex justify-evenly my-3 flex-wrap"> <!--Btn-->
+                        <div class="flex justify-evenly my-3 flex-wrap"> 
                             <button id="add-to-card"
                                 class="bg-amber-500 hover:bg-yellow-700 rounded-2xl text-sm px-7 py-1 shadow-sm text-white box-border text-nowrap">Add
                                 to cart</button>
@@ -145,20 +152,20 @@
                 </div>
 
                 <div id="carte" class="flex flex-col rounded-md shadow-lg">
-                    <div class="mx-auto"> <!--Image-->
+                    <div class="mx-auto"> 
                         <img src="../assets/imgs/F-N04.png" alt="#">
                     </div>
                     <div class="px-2">
-                        <span class="flex justify-around my-3"> <!--Title-->
+                        <span class="flex justify-around my-3"> 
                             <b>Can</b>
                             <p>4.5<i class="fa-solid fa-star" style="color: #FFD43B;"></i></p>
                         </span>
                         <p class="text-sm text-center opacity-60">Sofas</p>
-                        <div class="m-3 flex flex-col"> <!--Index-->
+                        <div class="m-3 flex flex-col"> 
                             <p class="text-blue-700"></p>
                             <p class="text-amber-600 self-center">2,099.99$</p>
                         </div>
-                        <div class="flex justify-evenly my-3 flex-wrap"> <!--Btn-->
+                        <div class="flex justify-evenly my-3 flex-wrap"> 
                             <button id="add-to-card"
                                 class="bg-amber-500 hover:bg-yellow-700 rounded-2xl text-sm px-7 py-1 shadow-sm text-white box-border text-nowrap">Add
                                 to cart</button>
@@ -169,20 +176,20 @@
                 </div>
 
                 <div id="carte" class="flex flex-col rounded-md shadow-lg">
-                    <div class="mx-auto"> <!--Image-->
+                    <div class="mx-auto"> 
                         <img src="../assets/imgs/F-N04.png" alt="#">
                     </div>
                     <div class="px-2">
-                        <span class="flex justify-around my-3"> <!--Title-->
+                        <span class="flex justify-around my-3"> 
                             <b>Can</b>
                             <p>4.5<i class="fa-solid fa-star" style="color: #FFD43B;"></i></p>
                         </span>
                         <p class="text-sm text-center opacity-60">Sofas</p>
-                        <div class="m-3 flex flex-col"> <!--Index-->
+                        <div class="m-3 flex flex-col"> 
                             <p class="text-blue-700"></p>
                             <p class="text-amber-600 self-center">2,099.99$</p>
                         </div>
-                        <div class="flex justify-evenly my-3 flex-wrap"> <!--Btn-->
+                        <div class="flex justify-evenly my-3 flex-wrap"> 
                             <button id="add-to-card"
                                 class="bg-amber-500 hover:bg-yellow-700 rounded-2xl text-sm px-7 py-1 shadow-sm text-white box-border text-nowrap">Add
                                 to cart</button>
@@ -194,7 +201,7 @@
 
             </div>
             </div>
-        </main>
+        </main> -->
     </section>
 
     <!-- Footer Section -->

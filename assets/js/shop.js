@@ -1,6 +1,7 @@
 const productsPerPage = 12;
 let currentPage = 1;
 let allProducts = [];
+let filteredProducts = [];
 
 const shopProductsGrid = document.getElementById("shopProductsGrid");
 const prevButton = document.getElementById("prevButton");
@@ -8,16 +9,31 @@ const nextButton = document.getElementById("nextButton");
 const currentPageSpan = document.getElementById("currentPage");
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
+const catOp = document.getElementById("catOp");
+const priceDropdown = document.getElementById("priceFilter");
 
-// Récupérer les produits depuis l'API
+// Event listener for price filtering
+priceDropdown.addEventListener("change", () => {
+    const selectedPriceRange = priceDropdown.value;
+    filterByPrice(selectedPriceRange);
+});
+
+// Fetch products from the API
 async function getProducts() {
     try {
         const response = await fetch("https://decor.codia-dev.com/products.json");
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
-        allProducts = data.products;
+
+        // Convert "prix" to numbers to avoid issues during filtering
+        allProducts = data.products.map(product => ({
+            ...product,
+            prix: parseFloat(product.prix),
+        }));
+        filteredProducts = [...allProducts];
+
         displayProducts(currentPage);
-        updatePaginationButtons();
+        updatePaginationButtons(filteredProducts.length);
         displayFeaturedProducts();
     } catch (error) {
         console.error("Erreur lors de la récupération des produits :", error);
@@ -25,13 +41,18 @@ async function getProducts() {
     }
 }
 
-// Afficher les produits pour la page actuelle
+// Display products on the current page
 function displayProducts(page) {
     const start = (page - 1) * productsPerPage;
     const end = start + productsPerPage;
-    const paginatedProducts = allProducts.slice(start, end);
+    const paginatedProducts = filteredProducts.slice(start, end);
 
-    shopProductsGrid.innerHTML = ""; 
+    shopProductsGrid.innerHTML = "";
+
+    if (paginatedProducts.length === 0) {
+        shopProductsGrid.innerHTML = `<p class="text-gray-500">Aucun produit trouvé.</p>`;
+        return;
+    }
 
     const fragment = document.createDocumentFragment();
     paginatedProducts.forEach((product) => {
@@ -46,77 +67,107 @@ function displayProducts(page) {
             <p class="text-gray-400 text-xs uppercase px-4 underline md:text-sm">${product.category}</p>
             <div class="p-4 flex justify-start justify-between flex-col md:flex-row">
                 <p class="text-black font-bold text-sm md:text-lg md:mt-2">$${product.prix}</p>
-                <button id="btn-add" class="add-to-cart-btn bg-yellow-500 py-1 px-4 rounded-lg font-semibold mt-2" data-id="${product.id}" >Add to cart</button>
+                <button id="btn-add" class="add-to-cart-btn bg-yellow-500 py-1 px-4 rounded-lg font-semibold mt-2" data-id="${product.id}">Add to cart</button>
             </div>`;
         fragment.appendChild(productCard);
     });
     shopProductsGrid.appendChild(fragment);
+
     document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
         btn.addEventListener("click", () =>
-          addToCart(parseInt(btn.getAttribute("data-id")))
+            addToCart(parseInt(btn.getAttribute("data-id")))
         );
-      });
+    });
 }
 
-
-function updatePaginationButtons() {
-    const totalPages = Math.ceil(allProducts.length / productsPerPage);
+// Update pagination buttons
+function updatePaginationButtons(totalProducts = filteredProducts.length) {
+    const totalPages = Math.ceil(totalProducts / productsPerPage);
     prevButton.disabled = currentPage === 1;
     nextButton.disabled = currentPage === totalPages;
-    currentPageSpan.textContent = currentPage; 
+    currentPageSpan.textContent = currentPage;
 }
 
-// Gestion des clics sur les boutons de pagination
+// Pagination controls
 prevButton.addEventListener("click", () => {
     if (currentPage > 1) {
         currentPage--;
         displayProducts(currentPage);
         updatePaginationButtons();
-        window.scrollTo({ top: 200, behavior: 'smooth' });
+        window.scrollTo({ top: 200, behavior: "smooth" });
     }
 });
 
 nextButton.addEventListener("click", () => {
-    const totalPages = Math.ceil(allProducts.length / productsPerPage);
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
     if (currentPage < totalPages) {
         currentPage++;
         displayProducts(currentPage);
         updatePaginationButtons();
-        window.scrollTo({ top: 200, behavior: 'smooth' });
+        window.scrollTo({ top: 200, behavior: "smooth" });
     }
 });
 
-// Fonction de recherche
-function searchProducts() {
-    const query = searchInput.value.toLowerCase();
-    if (query === "") {
-        // Si l'input est vide, réinitialiser tous les produits
-        getProducts();
-    } else {
-        // Sinon, filtrer les produits en fonction de la recherche
-        const filteredProducts = allProducts.filter(product =>
-            product.title.toLowerCase().includes(query) || product.category.toLowerCase().includes(query)
+// Category filtering
+catOp.addEventListener("change", () => {
+    const selectedCategory = catOp.value.toLowerCase();
+    filteredProducts = !selectedCategory
+        ? [...allProducts]
+        : allProducts.filter((product) =>
+            product.category.toLowerCase() === selectedCategory
         );
-        allProducts = filteredProducts;
-        currentPage = 1;
-        displayProducts(currentPage);
-        updatePaginationButtons();
-    }
-}
+    currentPage = 1;
+    displayProducts(currentPage);
+    updatePaginationButtons();
+});
 
+// Search functionality
+searchButton.addEventListener("click", () => {
+    const query = searchInput.value.toLowerCase().trim();
+    filteredProducts = allProducts.filter((product) =>
+        product.title.toLowerCase().includes(query) ||
+        product.category.toLowerCase().includes(query)
+    );
+    currentPage = 1;
+    displayProducts(currentPage);
+    updatePaginationButtons();
+});
 
-// Event listeners pour la recherche
-searchButton.addEventListener("click", searchProducts);
 searchInput.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
-        searchProducts();
+        searchButton.click();
     }
 });
 
-// Afficher les produits mis en avant
+// Price filtering
+function filterByPrice(priceRange) {
+    if (!priceRange) {
+        filteredProducts = [...allProducts];
+    } else {
+        switch (priceRange) {
+            case "1":
+                filteredProducts = allProducts.filter((product) => product.prix >= 0 && product.prix <= 500);
+                break;
+            case "2":
+                filteredProducts = allProducts.filter((product) => product.prix > 500 && product.prix <= 1000);
+                break;
+            case "3":
+                filteredProducts = allProducts.filter((product) => product.prix > 1000);
+                break;
+            default:
+                filteredProducts = [...allProducts];
+                break;
+        }
+    }
+    currentPage = 1;
+    displayProducts(currentPage);
+    updatePaginationButtons();
+}
+
+// Display featured products
 function displayFeaturedProducts() {
     const slider = document.getElementById("newSlider");
-    slider.innerHTML = ""; 
+    slider.innerHTML = "";
     const featuredProducts = allProducts.slice(0, 8);
 
     featuredProducts.forEach((product) => {
@@ -131,11 +182,11 @@ function displayFeaturedProducts() {
             <p class="text-gray-400 text-xs uppercase px-2 underline md:text-sm">${product.category}</p>
             <div class="p-2 flex items-center justify-between flex-col md:flex-row">
                 <p class="text-black font-bold text-sm md:text-lg">$${product.prix}</p>
-                <button id="btn-add" class="add-to-cart-btn bg-yellow-500 py-1 px-4 rounded-lg font-semibold mt-2" data-id="${product.id}" >Add to cart</button>
+                <button id="btn-add" class="add-to-cart-btn bg-yellow-500 py-1 px-4 rounded-lg font-semibold mt-2" data-id="${product.id}">Add to cart</button>
             </div>`;
         slider.appendChild(productCard);
     });
 }
 
-// Initialisation
+// Initialize
 getProducts();

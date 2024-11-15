@@ -51,6 +51,11 @@ function displayProducts(page) {
         fragment.appendChild(productCard);
     });
     shopProductsGrid.appendChild(fragment);
+    document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
+        btn.addEventListener("click", () =>
+          addToCart(parseInt(btn.getAttribute("data-id")))
+        );
+      });
 }
 
 

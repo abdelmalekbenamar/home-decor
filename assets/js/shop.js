@@ -1,4 +1,4 @@
-const productsPerPage = 12; 
+const productsPerPage = 12;
 let currentPage = 1;
 let allProducts = [];
 
@@ -27,20 +27,21 @@ function displayProducts(page) {
     paginatedProducts.forEach((product) => {
         const productCard = document.createElement("div");
         productCard.className =
-            "border border-black rounded-lg overflow-hidden shadow-lg bg-white lg:pt-10 lg:p-5 ";
-  
+            "border border-black rounded-lg overflow-hidden shadow-lg bg-white ";
+
         productCard.innerHTML = `
-            <img src="${product.img1}" alt="${product.title}" class="w-full h-48 object-cover">
-            <div class="px-3 lg:pt-8 flex justify-between lg:mt-6">
-                <h3 class="lg:text-xl font-bold">${product.title}</h3>  
-                <i class="ri-heart-line text-xl"></i>
-            </div>
-            <p class="text-gray-400 lg:mt-2 uppercase px-4 underline">${product.category}</p>
-            <div class="lg:p-4 p-3 flex lg:items-center justify-start lg:justify-between flex-col lg:flex-row">
-                <p class="text-black font-bold mt-2 lg:text-xl">$${product.prix}</p>
-                <button class="bg-yellow-500 py-1 px-4 rounded-lg font-semibold mt-2">Add to cart</button>
-            </div>`;
-        
+                                <img src="${product.img1}" alt="${product.title}" class="w-full h-32 object-cover md:h-48">
+                                <div class="px-4 pt-4 flex justify-between">
+                                    <h3 class="text-sm font-bold md:text-lg">${product.title}</h3>  
+                                    <i class="ri-heart-line text-sm md:text-xl"></i>
+                                </div>
+                                <p class="text-gray-400 text-xs uppercase px-4 underline md:text-sm">${product.category}</p>
+                                <div class="p-4 flex justify-start  justify-between flex-col md:flex-row">
+                                    <p class="text-black  font-bold text-sm md:text-lg md:mt-2">$${product.prix}</p>
+                                    <button class="bg-yellow-500 py-1 px-3 rounded-md font-semibold text-xs md:text-base mt-2">Add to cart</button>
+                                </div>`;
+
+
         shopProductsGrid.appendChild(productCard);
     });
 }
@@ -70,9 +71,38 @@ nextButton.addEventListener("click", () => {
         displayProducts(currentPage);
         updatePaginationButtons();
         currentPageSpan.textContent = currentPage;
-        window.scrollTo({ top: 200 , behavior: 'smooth' });
+        window.scrollTo({ top: 200, behavior: 'smooth' });
     }
 });
+
+function displayFeaturedProducts() {
+    const slider = document.getElementById("newSlider");
+    const featuredProducts = allProducts.slice(0, 8); // Exemple: sélection des 5 premiers produits
+
+    featuredProducts.forEach((product) => {
+        const productCard = document.createElement("div");
+        productCard.className = "min-w-[200px] border border-black rounded-lg overflow-hidden shadow-lg bg-white p-4";
+
+        productCard.innerHTML = `
+            <img src="${product.img1}" alt="${product.title}" class="w-full h-48 object-cover">
+            <div class="flex justify-between mt-2">
+                <h3 class="text-lg font-bold">${product.title}</h3>  
+                <i class="ri-heart-line text-xl"></i>
+            </div>
+            <p class="text-gray-400 text-xs uppercase px-2 underline md:text-sm">${product.category}</p>
+  <div class="p-2 flex items-center justify-between flex-col md:flex-row">
+    <p class="text-black font-bold text-sm md:text-lg">$${product.prix}</p>
+    <button class="bg-yellow-500 py-1 text-sm  px-3 rounded-md font-semibold text-xs  mt-2">Add to cart</button>
+  </div>
+        `;
+
+        slider.appendChild(productCard);
+    });
+}
+
+// Appelez cette fonction après avoir récupéré les produits dans `getProducts()`
+getProducts().then(() => displayFeaturedProducts());
+// displayFeaturedProducts();
 
 // Initialisation
 getProducts();

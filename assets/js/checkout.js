@@ -75,7 +75,7 @@ fermerButts.forEach( el => {
 });
 
 
-//creation du bouton supprimer pour la liste du checkout
+//creation du bouton supprimer pour la liste du checkouT
 let fermerButtCheckout = document.querySelectorAll(".delProductCheckout");
 fermerButtCheckout.forEach(el => {
   el.addEventListener("click", () =>{

@@ -9,6 +9,7 @@
     <script src="../assets/js/script.js" defer></script>
     <script src="../assets/js/shop.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="../assets/imgs/Favicon.svg">
     <title>Shop</title>
 </head>
 
@@ -86,7 +87,6 @@
 
 
 
-    <!-- Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden"></div>
 
 
@@ -99,15 +99,24 @@
                 <button id="searchButton" class="w-1/5 bg-white border border-black rounded-r-md"><i class="ri-search-line"></i></button>
             </div>
             <div class="flex justify-between mt-3 md:w-2/5 md:m-0">
-                <select name="" id="" class="border rounded-lg w-2/5 p-1 md:w-2/5  ">
-                    <option value="">Categories</option>
-                    <option value=""></option>
-                    <option value=""></option>
+                <select name="" id="catOp" class="border rounded-lg w-2/5 p-1 md:w-2/5  ">
+                    <option value="Categories">Categories</option>
+                    <option value="Decor">Decor</option>
+                    <option value="Lighting">Lighting</option>
+                    <option value="storage">storage</option>
+                    <option value="beds">beds</option>
+                    <option value="table">table</option>
+                    <option value="armchairs">armchairs</option>
+                    <option value="chairs">chairs</option>
+                    <option value="textile">textile</option>
+                    <option value="Sofas">Sofas</option>
                 </select>
-                <select name="" id="" class="border rounded-lg w-2/6 p-1 md:w-2/5 ">
+                <select name="" id="priceFilter" class="border rounded-lg w-2/6 p-1 md:w-2/5 ">
                     <option value="">Prix</option>
-                    <option value=""></option>
-                    <option value=""></option>
+                    <option value="1">de 0 jusqua 500</option>
+                    <option value="2">de 501 jusqua 1000</option>
+                    <option value="3">de 1001 de plus</option>
+
                 </select>
             </div>
         </div>

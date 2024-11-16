@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/script.js" defer></script>
     <link rel="stylesheet" href="../assets/css/checkoutStyles.css">
+    
     <title>Checkout</title>
 </head>
 <body class="relative">
@@ -91,6 +92,8 @@
                 
                 <div id="checkoutProduct">
 
+                  <!--
+
                     <div class="productsAndPrices flex justify-between items-center p-2.5 border-t-[black] border-t border-solid">
                         <div class="productAddMinusDel">
                             <p class="delProductCheckout inline-block mr-2.5">X</p>
@@ -118,23 +121,24 @@
                     </div>
                     
                     <div class="productsAndPrices flex justify-between items-center p-2.5 border-t-[black] border-t border-solid">
-                        <div class="productAddMinusDel">
-                            <p class="delProductCheckout inline-block mr-2.5">X</p>
-                            <img class="imageOfCheckout w-10 inline-block mr-2.5" src="https://woodmart.b-cdn.net/furniture2/wp-content/uploads/sites/11/2023/04/wd-furniture-tables-prod-11-3.jpg" alt="">
-                            <div class="ajouterDeminuerProduct inline-block mr-2.5 inline-flex w-[70px] justify-between px-2.5 rounded-[30px] border-[solid] border-[1px]">
+                      <div class="productAddMinusDel">
+                        <p class="delProductCheckout inline-block mr-2.5">X</p>
+                        <img class="imageOfCheckout w-10 inline-block mr-2.5" src="https://woodmart.b-cdn.net/furniture2/wp-content/uploads/sites/11/2023/04/wd-furniture-tables-prod-11-3.jpg" alt="">
+                        <div class="ajouterDeminuerProduct inline-block mr-2.5 inline-flex w-[70px] justify-between px-2.5 rounded-[30px] border-[solid] border-[1px]">
                                 <div id="moin">-</div>
                                 <div id="numPiece" class="w-5 text-center border-x-[black] border-l border-solid border-r">1</div>
                                 <div id="plus">+</div>
+                              </div>
                             </div>
-                        </div>
-                        <div class="lePrixProduct">1458</div>
-                    </div>
-
+                            <div class="lePrixProduct">1458</div>
+                          </div>
+                          
+                          -->
                     
                 </div>
                 <div class="laSommeDesProduits flex justify-between border-t-[black] border-t border-solid p-2.5">
                     <p>Total</p>
-                    <p>123654</p>
+                    <p class><span class="leTotal"></span> $</p>
                 </div>
             </div>
         </section>
@@ -231,6 +235,8 @@
       <div class="text-center py-5 text-white text-sm bg-black">
         © 2024 Home Decor. All rights reserved.
       </div>
-    
+      
+
+      <script src="../assets/js/checkout.js"></script>
 </body>
 </html>

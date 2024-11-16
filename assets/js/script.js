@@ -44,7 +44,7 @@ async function getProducts() {
   const response = await fetch("https://decor.codia-dev.com/products.json");
   const data = await response.json();
   displayProducts(data.products);
-  console.log(data.products);
+  // console.log(data.products);
   localStorage.setItem("data", JSON.stringify(data.products));
 }
 

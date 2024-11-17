@@ -53,13 +53,14 @@ function removeFromWishlist(productId) {
 }
 
 function addToWishlist(product) {
-    let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
-    const exists = favoriteProducts.some((item) => item.id === product.id); // Check for duplicates
+    const exists = favoriteProducts.some((item) => item.id === product.id);
+
     if (!exists) {
         favoriteProducts.push(product);
         localStorage.setItem("favoriteProducts", JSON.stringify(favoriteProducts));
     }
 }
+
 
 displayWishlist();
 

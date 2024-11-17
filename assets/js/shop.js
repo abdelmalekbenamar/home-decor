@@ -193,26 +193,46 @@ function displayFeaturedProducts() {
     });
 }
 
+// Initialize favoriteProducts from localStorage
+let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
+
 //heart action
 function toggleHeart(product) {
-    const heartIcon = event.target; // Target the heart icon clicked
+    const heartIcon = event.target;
+    const exists = favoriteProducts.some((item) => item.id === product.id);
 
-    let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
-
-    if (heartIcon.classList.contains("ri-heart-line")) {
-        // Add to favorites
-        heartIcon.classList.remove("ri-heart-line");
-        heartIcon.classList.add("ri-heart-fill");
-        favoriteProducts.push(product);
-    } else {
-        // Remove from favorites
+    if (exists) {
+        // Remove from wishlist
+        favoriteProducts = favoriteProducts.filter((item) => item.id !== product.id);
         heartIcon.classList.remove("ri-heart-fill");
         heartIcon.classList.add("ri-heart-line");
-        favoriteProducts = favoriteProducts.filter((p) => p.id !== product.id);
+    } else {
+        // Add to wishlist
+        favoriteProducts.push(product);
+        heartIcon.classList.remove("ri-heart-line");
+        heartIcon.classList.add("ri-heart-fill");
     }
 
     localStorage.setItem("favoriteProducts", JSON.stringify(favoriteProducts));
 }
+
+function updateHeartIcons() {
+    document.querySelectorAll(".ri-heart-line, .ri-heart-fill").forEach((icon) => {
+        const productId = parseInt(icon.getAttribute("data-id"));
+        const inWishlist = favoriteProducts.some((item) => item.id === productId);
+
+        if (inWishlist) {
+            icon.classList.remove("ri-heart-line");
+            icon.classList.add("ri-heart-fill");
+        } else {
+            icon.classList.remove("ri-heart-fill");
+            icon.classList.add("ri-heart-line");
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", updateHeartIcons);
+
 
 
 // Initialize

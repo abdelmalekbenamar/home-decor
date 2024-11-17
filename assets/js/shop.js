@@ -62,7 +62,7 @@ function displayProducts(page) {
             <img src="${product.img1}" alt="${product.title}" class="w-full h-32 object-contain md:h-48">
             <div class="px-4 pt-4 flex justify-between">
                 <h3 class="text-sm font-bold md:text-lg">${product.title}</h3>  
-                <i class="ri-heart-line text-sm md:text-xl"></i>
+                <button class="heart-icon"><i class="ri-heart-line text-sm md:text-xl"></i></button>
             </div>
             <p class="text-gray-400 text-xs uppercase px-4 underline md:text-sm">${product.category}</p>
             <div class="p-4 flex justify-start justify-between flex-col md:flex-row">
@@ -70,7 +70,12 @@ function displayProducts(page) {
                 <button id="btn-add" class="add-to-cart-btn bg-yellow-500 py-1 px-4 rounded-lg font-semibold mt-2" data-id="${product.id}">Add to cart</button>
             </div>`;
         fragment.appendChild(productCard);
+    
+        // Attach the heart icon click event
+        const heartButton = productCard.querySelector(".heart-icon i");
+        heartButton.addEventListener("click", () => toggleHeart(product));
     });
+    
     shopProductsGrid.appendChild(fragment);
 
     document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
@@ -177,7 +182,7 @@ function displayFeaturedProducts() {
             <img src="${product.img1}" alt="${product.title}" class="w-full h-48 object-cover">
             <div class="flex justify-between mt-2">
                 <h3 class="text-lg font-bold">${product.title}</h3>  
-                <i class="ri-heart-line text-xl"></i>
+                <button><i class="ri-heart-line text-xl"></i></button>
             </div>
             <p class="text-gray-400 text-xs uppercase px-2 underline md:text-sm">${product.category}</p>
             <div class="p-2 flex items-center justify-between flex-col md:flex-row">
@@ -187,6 +192,28 @@ function displayFeaturedProducts() {
         slider.appendChild(productCard);
     });
 }
+
+//heart action
+function toggleHeart(product) {
+    const heartIcon = event.target; // Target the heart icon clicked
+
+    let favoriteProducts = JSON.parse(localStorage.getItem("favoriteProducts")) || [];
+
+    if (heartIcon.classList.contains("ri-heart-line")) {
+        // Add to favorites
+        heartIcon.classList.remove("ri-heart-line");
+        heartIcon.classList.add("ri-heart-fill");
+        favoriteProducts.push(product);
+    } else {
+        // Remove from favorites
+        heartIcon.classList.remove("ri-heart-fill");
+        heartIcon.classList.add("ri-heart-line");
+        favoriteProducts = favoriteProducts.filter((p) => p.id !== product.id);
+    }
+
+    localStorage.setItem("favoriteProducts", JSON.stringify(favoriteProducts));
+}
+
 
 // Initialize
 getProducts();

@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../assets/imgs/Favicon.svg">
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/script.js" defer></script>
-    <title>Home Decor - Contact</title>
+    <script src="../assets/js/whislist.js" defer></script>
+    <title>Home Decor - Wishlist</title>
 </head>
 
 <body class="relative">
@@ -22,13 +24,13 @@
         <nav class="hidden md:flex space-x-6 text-gray-800 font-medium">
             <a href="../index.html" class="hover:text-yellow-500">Home</a>
             <a href="./shop.html" class="hover:text-yellow-500">Shop</a>
-            <a href="./contact.html" class="hover:text-yellow-500 text-yellow-500">Contact</a>
+            <a href="./contact.html" class="hover:text-yellow-500">Contact</a>
             <a href="./about.html" class="hover:text-yellow-500">About</a>
             <a href="./checkout.html" class="hover:text-yellow-500">Checkout</a>
         </nav>
         <!-- Icons -->
         <div class="flex space-x-4 items-center">
-            <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
+            <div class="bg-yellow-500  p-2 rounded-full w-9 h-9 flex items-center justify-center">
                 <i class="ri-shopping-cart-line text-white text-xl " id="cartIcon"></i>
             </div>
             <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
@@ -79,51 +81,20 @@
     <!-- Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden"></div>
 
-    <!-- CONTACT - PAGE -->
-    <main>
-        <section>
-            <h1 class="text-center text-[2.5rem] mt-3 underline underline-offset-1 font-bold ">Contact</h1>
-            <div class="flex justify-center rounded-lg">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10108.05681503306!2d-9.258837615930085!3d32.237251287688906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdac211719897669%3A0x6f59fa5bb517f58a!2sYouCode%20Safi!5e0!3m2!1sfr!2sma!4v1731076290116!5m2!1sfr!2sma"
-                    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    class="w-[90%] md:h-[500px] lg:h-[600px] h-[500px] rounded-lg my-10"></iframe>
-            </div>
-        </section>
-        <section class="md:grid md:grid-cols-2 md:gap-5 md:my-10 md:justify-between">
-            <div class="my-auto ">
-                <form class="flex flex-col items-center mx-5">
-                    <label for="name"></label>
-                    <input type="text" name="name" placeholder="Full Name"
-                        class="w-[90%] sm:w-[75%] md:w-[90%] min-h-10 shadow-xl rounded-md my-5 pl-2">
-
-                    <label for="email"></label>
-                    <input type="email" name="email" placeholder="Email"
-                        class="w-[90%] sm:w-[75%] md:w-[90%] min-h-10 shadow-xl rounded-md my-5 pl-2">
-
-                    <label for="number"></label>
-                    <input type="number" name="number" placeholder="N.téléphone"
-                        class="w-[90%] sm:w-[75%] md:w-[90%] min-h-10 shadow-xl rounded-md my-5 pl-2">
-
-                    <select id="order" name="order"
-                        class="w-[90%] sm:w-[75%] md:w-[90%] h-10 shadow-xl rounded-md my-5">
-                        <option value="Purchase">Purchase Request</option>
-                        <option value="Information">Information Request</option>
-                        <option value="Complaint">Complaint</option>
-                        <option value="Other">Other</option>
-                    </select>
-
-                    <textarea name="message" id="message" placeholder="Message"
-                        class="w-[90%] sm:w-[75%] md:w-[90%] min-h-36 shadow-xl rounded-md my-5 pl-1"></textarea>
-
-                    <button class="bg-yellow-400 w-28 h-10 rounded-md shadow-xl my-3 text-lg">Send</button>
-                </form>
-            </div>
-            <div class="hidden md:block">
-                <img class="h-full mx-auto" src="../assets/imgs/png01 1.png" alt="#">
-            </div>
-        </section>
-    </main>
+    <!-- Favorite page -->
+    <header class="grid py-2">
+        <h1 class="text-3xl text-center font-serif">Wishlist</h1>
+        <span class="flex justify-between px-3 w-[80%] mx-auto">
+            <h2 id="counter">Total: </h2>
+            <button id="add-all-to-cart" class="justify-self-end h-7 rounded-xl px-3 bg-gray-200 shadow-lg"><i
+                    class="fa-solid fa-cart-plus"></i>&nbsp;Add all to cart</button>
+        </span>
+    </header>
+    
+    
+    <section class="my-4">
+        <div id="wishlistContainer" class="w-[90%] grid sm:grid-cols-3 md:grid-cols-4 gap-3 mx-auto"></div>
+    </section>
 
     <!-- Footer Section -->
     <footer class="bg-black py-10 px-5 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -202,6 +173,8 @@
     <div class="text-center py-5 text-white text-sm bg-black">
         © 2024 Home Decor. All rights reserved.
     </div>
+
+
 
 </body>
 

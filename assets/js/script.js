@@ -39,12 +39,119 @@ overlay.addEventListener("click", () => {
   overlay.classList.add("hidden");
 });
 
-// test json file fetch
+// Products json file fetch
 async function getProducts() {
   const response = await fetch("https://decor.codia-dev.com/products.json");
   const data = await response.json();
   displayProducts(data.products);
   console.log(data.products);
+  localStorage.setItem("data", JSON.stringify(data.products));
+}
+
+// Add to cart function and Quantiy update
+function addToCart(id) {
+  let cartProduct;
+  const data = JSON.parse(localStorage.getItem("data"));
+  let myCart = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log(id);
+
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].id == id) {
+      cartProduct = data[i];
+      break; 
+    }
+  }
+
+  let productExists = false;
+  for (let i = 0; i < myCart.length; i++) {
+    if (myCart[i].id == id) {
+      myCart[i].quantity = (myCart[i].quantity || 1) + 1;
+      productExists = true;
+      break;
+    }
+  }
+
+  if (!productExists) {
+    myCart.push({ ...cartProduct, quantity: 1 });
+  }
+  localStorage.setItem("cart", JSON.stringify(myCart));
+  displayCartProducts();
+  displaySubtotal()
+  UpdateItemsNumber()
+}
+
+
+// delete product from cart popup
+const deleteProduct = document.getElementById("deleteProduct");
+function deleteCartProduct(deleteId) {
+  let myCart = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log(deleteId);
+  console.log("deleted");
+  for (let i = 0; i < myCart.length; i++) {
+    if (myCart[i].id == deleteId) {
+      myCart.splice(i, 1);
+      break;
+    }
+  }
+  localStorage.setItem("cart", JSON.stringify(myCart));
+  displayCartProducts();
+  displaySubtotal()
+  UpdateItemsNumber()
+}
+
+// display cart products in cart modal
+function displayCartProducts() {
+  const cartPopup = document.getElementById("cartProducts");
+  const myCart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartPopup.innerHTML = "";
+  if (myCart.length == 0) {
+    cartPopup.innerHTML = `No items in the cart`;
+  } else {
+      myCart.forEach((product) => {
+      const productCard = document.createElement("div");
+      productCard.className = "flex gap-4 p-4 border rounded-xl mt-5 mr-2 items-center relative";
+      productCard.innerHTML = `
+      <i class="ri-close-line absolute right-3 text-red-600 top-2" id="deleteProduct" onclick="deleteCartProduct(${product.id})"></i>
+       <img src="${product.img1}" height="60px" width="60px">
+          <div>
+            <h2 class="font-semibold">${product.title}</h2>
+            <p>${product.quantity} × ${product.prix}</p>
+          </div>`;
+      cartPopup.appendChild(productCard);
+    });
+  }
+  displaySubtotal();
+  UpdateItemsNumber()
+}
+
+// Update Items Cart Span
+const itemsNumber = document.getElementById('itemsNumber');
+function UpdateItemsNumber(){
+    let itemsTotal = 0 ;
+    const myCart = JSON.parse(localStorage.getItem("cart")) || [];
+    for(let i=0 ; i<myCart.length ; i++){
+      itemsTotal += myCart[i].quantity ;
+    }
+    console.log(itemsTotal);
+    itemsNumber.innerHTML = `${itemsTotal}`;
+}
+
+// display subtotal 
+const subtotal = document.getElementById('subtotal');
+function displaySubtotal(){
+  let total = 0;
+  const myCart = JSON.parse(localStorage.getItem("cart")) || [];
+  subtotal.innerHTML="";
+  for(let i=0 ; i<myCart.length ; i++){
+    const prix = parseFloat(myCart[i].prix);
+    const quantity = parseInt(myCart[i].quantity);
+    total += prix * quantity;
+  }
+  console.log(total);
+  subtotal.innerHTML=`
+  <h2 class="font-semibold text-xl">Subtotal:</h2>
+  <p class="text-yellow-500 text-xl">${total} $</p>
+  `
 }
 
 // display products grid
@@ -67,10 +174,19 @@ function displayProducts(products) {
                  <p class="text-gray-400 lg:mt-2 uppercase px-4 underline">${product.category}</p>
                 <div class="lg:p-4 p-3 flex lg:items-center justify-start lg:justify-between flex-col lg:flex-row">
                     <p class="text-black font-bold mt-2 lg:text-xl">$${product.prix}</p>
-                    <button class="bg-yellow-500 py-1 px-4 rounded-lg font-semibold mt-2">Add to cart</button>
+                    <button id="btn-add" class="add-to-cart-btn bg-yellow-500 py-1 px-4 rounded-lg font-semibold mt-2" data-id="${product.id}" >Add to cart</button>
                 </div>
     `;
     productsGrid.appendChild(productCard);
   });
+
+  document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
+    btn.addEventListener("click", () =>
+      addToCart(parseInt(btn.getAttribute("data-id")))
+    );
+  });
 }
 getProducts();
+displayCartProducts();
+displaySubtotal()
+// UpdateItemsNumber()

@@ -9,6 +9,7 @@
     <script src="../assets/js/script.js" defer></script>
     <script src="../assets/js/shop.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="../assets/imgs/Favicon.svg">
     <title>Shop</title>
 </head>
 
@@ -29,18 +30,20 @@
         </nav>
         <!-- Icons -->
         <div class="flex space-x-4 items-center">
-            <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
-                <i class="ri-shopping-cart-line text-white text-xl " id="cartIcon"></i>
+            <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center relative">
+              <i class="ri-shopping-cart-line text-white text-xl" id="cartIcon"></i>
+              <span class="absolute top-0 right-0 bg-black text-white text-[8px] font-bold rounded-full w-4 h-4 flex items-center justify-center" id="itemsNumber">0</span>
             </div>
+            
             <div class="bg-yellow-500 p-2 rounded-full w-9 h-9 flex items-center justify-center">
-                <i class="ri-heart-line text-white text-xl"></i>
+              <a href="./favorite.html"><i class="ri-heart-line text-white text-xl"></i></a>
             </div>
             <!-- Hamburger Menu Icon -->
             <button id="menu-toggle" class="text-gray-800 md:hidden ">
-                <i class="ri-menu-3-line text-2xl"></i>
+              <i class="ri-menu-3-line text-2xl"></i>
             </button>
+          </div>
         </div>
-    </div>
 
     <!-- Sidebar Menu -->
     <aside id="sidebar"
@@ -60,48 +63,60 @@
     </aside>
 
     <!-- Cart Sidebar Popup -->
-    <div id="cartSidebar"
-        class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
-        <div class="p-4 flex-1">
-            <div class="cartHead flex justify-between items-center">
-                <h2 class="text-xl font-bold mb-4">Your Cart</h2>
-                <i class="ri-close-line text-xl cursor-pointer" id="closeCartSidebar"></i>
-            </div>
-            <div class="cartProducts">
-                <p class="text-gray-500">No items in the cart</p>
-            </div>
-        </div>
-        <div class="p-4">
-            <button id="closeSidebar" class="w-full bg-yellow-500 text-white py-2 rounded-full">
-                <a href="../pages/checkout.html">Proceed to Checkout</a>
-            </button>
-        </div>
+  <div id="cartSidebar"
+  class="fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-50 flex flex-col">
+  <div class="p-4 flex-1">
+    <div class="cartHead flex justify-between items-center">
+      <h2 class="text-xl font-bold mb-4">Shopping cart</h2>
+      <i class="ri-close-line text-xl cursor-pointer" id="closeCartSidebar"></i>
     </div>
+    <div id="cartProducts"class="overflow-y-scroll max-h-[calc(100vh-200px)]">
+      <p class="text-gray-500">No items in the cart</p>
+    </div>
+  </div>
+  <div class="p-4">
+    <div class="flex justify-between my-4 mx-2" id="subtotal">
+      <!-- <h2 class="font-semibold text-xl">Subtotal:</h2>
+      <p class="text-yellow-500 underline">500 Dh</p> -->
+    </div>
+    <button id="closeSidebar" class="w-full bg-yellow-500 text-white py-2 rounded-full">
+      <a href="./pages/checkout.html">Proceed to Checkout</a>
+    </button>
+  </div>
+</div>
 
 
 
-    <!-- Overlay -->
     <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden"></div>
 
 
 
     <!-- shop -->
     <section class=" w-full  ">
-        <div class="bg-black w-5/6  p-3 justify-self-center rounded-lg  m-6 mt-20 md:flex justify-between md:p-5">
+        <div class="bg-black w-5/6  p-3 justify-self-center  rounded-lg  m-6 mt-20 md:flex justify-between md:p-5">
             <div class="flex justify-between md:w-2/5 ">
-                <input class="w-4/5 rounded-l-md p-1" type="text" placeholder="Search for products">
-                <button class="w-1/5 bg-white border border-black rounded-r-md"><i class="ri-search-line"></i></button>
+                <input id="searchInput"class="w-4/5 rounded-l-md p-1" type="text" placeholder="Search for products">
+                <button id="searchButton" class="w-1/5 bg-white border border-black rounded-r-md"><i class="ri-search-line"></i></button>
             </div>
             <div class="flex justify-between mt-3 md:w-2/5 md:m-0">
-                <select name="" id="" class="border rounded-lg w-2/5 p-1 md:w-2/5  ">
-                    <option value="">Categories</option>
-                    <option value=""></option>
-                    <option value=""></option>
+                <select name="" id="catOp" class="border rounded-lg w-2/5 p-1 md:w-2/5  ">
+                    <option value="Categories">Categories</option>
+                    <option value="Decor">Decor</option>
+                    <option value="Lighting">Lighting</option>
+                    <option value="storage">storage</option>
+                    <option value="beds">beds</option>
+                    <option value="table">table</option>
+                    <option value="armchairs">armchairs</option>
+                    <option value="chairs">chairs</option>
+                    <option value="textile">textile</option>
+                    <option value="Sofas">Sofas</option>
                 </select>
-                <select name="" id="" class="border rounded-lg w-2/6 p-1 md:w-2/5 ">
+                <select name="" id="priceFilter" class="border rounded-lg w-2/6 p-1 md:w-2/5 ">
                     <option value="">Prix</option>
-                    <option value=""></option>
-                    <option value=""></option>
+                    <option value="1">de 0 jusqua 500</option>
+                    <option value="2">de 501 jusqua 1000</option>
+                    <option value="3">de 1001 de plus</option>
+
                 </select>
             </div>
         </div>
@@ -110,21 +125,30 @@
 
             <!-- Prodcuts Grid -->
             <div class="grid grid-cols-2  lg:grid-cols-4 gap-2 lg:gap-6 md:grid-cols-3" id="shopProductsGrid">
-                <!-- products cards with js -->
+               
             </div>
         </div>
-        <!-- Product cards -->
+        <!-- Product pagination -->
         </div>
         <div class="justify-self-center mt-6 mb-6">
             <button id="prevButton"
                 class="display inline-block w-8 h-8 mr-3 text-center border border-2 border-yellow-500 bg-black text-white rounded-full transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-yellow-500 duration-300 "><i
                     class="ri-skip-left-line"></i></button>
-            <span class="display inline-block w-10 h-10 text-center bg-black p-2 text-white rounded-full">1</span>
+            <span id="currentPage" class="display inline-block w-10 h-10 text-center bg-black p-2 text-white rounded-full">1</span>
             <button id="nextButton"
                 class="display inline-block w-8 h-8 ml-3  text-center border border-2 border-yellow-500 bg-black  text-white rounded-full transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-yellow-500 duration-300 "><i
                     class="ri-skip-right-line"></i></button>
         </div>
     </section>
+
+
+    <section id="newSliderSection" class="w-full pt-6 pb-10 px-8 bg-black justify-self-center my-5 lg:my-20 md:my-10">
+        <h2 class="text-xl text-white font-bold mb-4">Produits en vedette</h2>
+        <div id="newSlider" class="flex space-x-8 overflow-x-scroll">
+            
+        </div>
+    </section>
+    
 
 
 
@@ -205,6 +229,9 @@
     <div class="text-center py-5 text-white text-sm bg-black">
         © 2024 Home Decor. All rights reserved.
     </div>
+<script>
+    
+</script>
 </body>
 
 </html>
